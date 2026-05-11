@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Books</title>
-  <link rel="icon" href="icon_books.jpg" type="image/x-icon">
+  <link rel="icon" href="icon_videos.jpg" type="image/x-icon">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" as="style">
   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
   <style>
@@ -349,7 +349,7 @@
     // 缩放功能核心 (手动缩放图片大小，范围 50% ~ 200%，步长10%)
     // 并自动重新排列布局 (通过动态改变 .book-item 的宽度)
     // ========================
-    let currentScalePercent = 100;      // 初始 100%
+    let currentScalePercent = 50;      // 初始 100%
     const DEFAULT_WIDTH = 220;           // 基准宽度 (px) 与 CSS .book-item 初始一致
     const MIN_SCALE = 50;
     const MAX_SCALE = 200;
@@ -393,8 +393,8 @@
     
     // 重置缩放
     function resetZoom() {
-      if (currentScalePercent === 100) return;
-      currentScalePercent = 100;
+      if (currentScalePercent === 50) return;
+      currentScalePercent = 50;
       applyZoomToItems();
     }
     
@@ -428,7 +428,7 @@
     
     showLoading();
     
-    fetch('booklist.json')
+    fetch('videolist.json')
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}`);
@@ -535,7 +535,7 @@
       .catch(error => {
         console.error('加载书籍数据时出错:', error);
         removeLoading();
-        container.innerHTML = '<div style="text-align: center; font-size: 22px; color: #a0522d; background: #fff8f0; margin: 40px auto; padding: 40px; border-radius: 28px; max-width: 80%;">📭 无法加载书籍清单，请检查网络或 booklist.json 文件是否存在。<br><span style="font-size: 16px;">' + error.message + '</span></div>';
+        container.innerHTML = '<div style="text-align: center; font-size: 22px; color: #a0522d; background: #fff8f0; margin: 40px auto; padding: 40px; border-radius: 28px; max-width: 80%;">📭 无法加载影视清单，请检查网络或 videolist.json 文件是否存在。<br><span style="font-size: 16px;">' + error.message + '</span></div>';
       });
     
     // 绑定缩放控件事件 (必须在DOM完全加载后，因为控件在HTML中已存在)
@@ -631,7 +631,10 @@
       }
     }, 150);
   });  
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   </script>
 </body>
 </html>
