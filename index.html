@@ -358,7 +358,7 @@
     // 获取容器和待更新的元素集合
     let videoItems = [];          // 存储所有 .video-item 元素引用
     
-    // 更新所有书籍卡片宽度
+    // 更新所有影视卡片宽度
     function applyZoomToItems() {
       if (!videoItems.length) return;
       const newWidth = (DEFAULT_WIDTH * currentScalePercent) / 100;
@@ -409,7 +409,7 @@
     }
     
     // ========================
-    // 加载书籍数据 + 构建书架 + 同步videoItems引用
+    // 加载影视数据 + 构建影视夹 + 同步videoItems引用
     // ========================
     const container = document.getElementById('video-container');
     
@@ -417,7 +417,7 @@
       const loadingDiv = document.createElement('div');
       loadingDiv.className = 'loading-placeholder';
       loadingDiv.id = 'temp-loading';
-      loadingDiv.textContent = '📚 正在为你准备书架 ...';
+      loadingDiv.textContent = '📚 正在为你准备影视架 ...';
       container.appendChild(loadingDiv);
     };
     
