@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Books</title>
+  <link rel="icon" href="icon_books.jpg" type="image/x-icon">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Caveat', cursive;
+      background: linear-gradient(135deg, #f5f7fa 0%, #ddeeff 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* 缩放控制栏 - 悬浮优雅 */
+    .zoom-controls {
+      position: sticky;
+      top: 16px;
+      z-index: 200;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin: 12px auto 0 auto;
+      padding: 10px 28px;
+      background: rgba(255, 248, 240, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 60px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      width: fit-content;
+      border: 1px solid rgba(255, 140, 0, 0.3);
+      font-family: system-ui, 'Segoe UI', 'Caveat', cursive;
+    }
+
+    .zoom-btn {
+      background: linear-gradient(145deg, #fff2e6, #ffe0cc);
+      border: none;
+      font-size: 1.7rem;
+      font-weight: bold;
+      width: 48px;
+      height: 48px;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #b45f2b;
+      font-family: monospace;
+    }
+
+    .zoom-btn:active {
+      transform: scale(0.94);
+      background: linear-gradient(145deg, #ffdec5, #ffcfb0);
+    }
+
+    .zoom-btn.reset-btn {
+      background: linear-gradient(145deg, #f0e7dc, #e2d4c4);
+      font-size: 1.1rem;
+      width: auto;
+      padding: 0 22px;
+      gap: 6px;
+      font-weight: 600;
+      color: #6b3e1c;
+    }
+
+    .zoom-value {
+      font-size: 1.4rem;
+      font-weight: bold;
+      background: #fff6ed;
+      padding: 0 14px;
+      border-radius: 40px;
+      line-height: 48px;
+      min-width: 80px;
+      text-align: center;
+      color: #c25d1a;
+      letter-spacing: 1px;
+      font-family: monospace;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    #quote {
+      position: relative;
+      top: 0;
+      margin: 20px auto 0 auto;
+      transform: none;
+      font-size: 24px;
+      color: #333;
+      width: 90%;
+      max-width: 900px;
+      opacity: 1;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 20px 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      backdrop-filter: blur(2px);
+    }
+
+    .main-text {
+      text-align: center;
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .quote-attribution {
+      text-align: right;
+      font-weight: bold;
+      font-size: 20px;
+      opacity: 0.8;
+      display: block;
+      width: 100%;
+    }
+
+    #book-container {
+      position: relative;
+      width: 100%;
+      padding: 30px 20px 60px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px 35px;
+      box-sizing: border-box;
+      margin-top: 25px;
+      transition: all 0.2s ease;
+    }
+
+    .book-item {
+      position: relative;
+      width: 220px;  /* 基础宽度，会被JS动态缩放覆盖 */
+      transition: transform 0.25s ease, width 0.2s cubic-bezier(0.2, 0.9, 0.4, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .book-item:hover {
+      transform: translateY(-6px);
+    }
+
+    /* 标签容器 - 在图片上方 */
+    .book-label-container {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .book-label {
+      background: linear-gradient(135deg, #ff8c00, #ff6b00);
+      color: white;
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+      font-size: 20px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(255, 107, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.2s ease;
+    }
+
+    .book-label:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 22px rgba(255, 107, 0, 0.5);
+    }
+
+    .book-label-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .book-emoji {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .book-number {
+      font-size: 22px;
+      line-height: 1;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 图片容器：保证完整显示且不裁剪 */
+    .book-image {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 7 / 10;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.2s ease;
+      background-color: #faf3e0;
+      display: block;
+    }
+
+    .book-image:hover {
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+      transform: scale(1.01);
+    }
+
+    .book-image-wrapper {
+      width: 100%;
+      background: linear-gradient(145deg, #f5ede3, #e8dfd3);
+      border-radius: 12px;
+      padding: 4px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-title {
+      font-size: 18px;
+      margin-top: 10px;
+      font-weight: 500;
+      color: #3e3a39;
+      text-align: center;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: 'Caveat', cursive;
+      letter-spacing: 0.5px;
+    }
+
+    /* 响应式调整保留，但缩放时会动态覆盖宽度，因此基础媒体查询仅作为降级 */
+    @media (max-width: 900px) {
+      #quote {
+        font-size: 20px;
+        padding: 16px 30px;
+        margin-top: 16px;
+      }
+      .quote-attribution {
+        font-size: 18px;
+      }
+      .book-label {
+        width: 52px;
+        height: 52px;
+        font-size: 18px;
+      }
+      .book-number {
+        font-size: 20px;
+      }
+      .book-emoji {
+        font-size: 16px;
+      }
+      .book-title {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #book-container {
+        gap: 32px 20px;
+        padding: 20px 16px 50px 16px;
+      }
+      .book-label {
+        width: 48px;
+        height: 48px;
+        font-size: 16px;
+      }
+      .book-number {
+        font-size: 18px;
+      }
+      .book-emoji {
+        font-size: 14px;
+      }
+      .book-title {
+        font-size: 14px;
+        margin-top: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .book-label {
+        width: 44px;
+        height: 44px;
+      }
+      .book-number {
+        font-size: 17px;
+      }
+      #quote {
+        font-size: 18px;
+        padding: 12px 20px;
+      }
+      .quote-attribution {
+        font-size: 15px;
+      }
+      .book-title {
+        font-size: 13px;
+      }
+    }
+    
+    .loading-placeholder {
+      text-align: center;
+      padding: 40px;
+      font-size: 22px;
+      color: #7f8c8d;
+      width: 100%;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <div id="quote">
+    <div class="main-text">
+      Change later.
+    </div>
+    <div class="quote-attribution">
+      &mdash; Sheldon, <em>Bigbang</em>
+    </div>
+  </div>
+
+  <!-- 缩放控制栏：新功能1 & 新功能2（重置） -->
+  <div class="zoom-controls">
+    <button class="zoom-btn" id="zoom-out-btn" title="缩小10%">−</button>
+    <span class="zoom-value" id="zoom-percent">100%</span>
+    <button class="zoom-btn" id="zoom-in-btn" title="放大10%">+</button>
+    <button class="zoom-btn reset-btn" id="zoom-reset-btn" title="重置为默认大小">↺</button>
+  </div>
+
+  <div id="book-container"></div>
+
+  <script>
+    // ========================
+    // 缩放功能核心 (手动缩放图片大小，范围 50% ~ 200%，步长10%)
+    // 并自动重新排列布局 (通过动态改变 .book-item 的宽度)
+    // ========================
+    let currentScalePercent = 100;      // 初始 100%
+    const DEFAULT_WIDTH = 220;           // 基准宽度 (px) 与 CSS .book-item 初始一致
+    const MIN_SCALE = 50;
+    const MAX_SCALE = 200;
+    const STEP = 10;
+    
+    // 获取容器和待更新的元素集合
+    let bookItems = [];          // 存储所有 .book-item 元素引用
+    
+    // 更新所有书籍卡片宽度
+    function applyZoomToItems() {
+      if (!bookItems.length) return;
+      const newWidth = (DEFAULT_WIDTH * currentScalePercent) / 100;
+      // 使用 requestAnimationFrame 保证流畅布局重排
+      requestAnimationFrame(() => {
+        for (let item of bookItems) {
+          item.style.width = newWidth + 'px';
+        }
+        // 更新百分比文本显示
+        const percentSpan = document.getElementById('zoom-percent');
+        if (percentSpan) percentSpan.textContent = currentScalePercent + '%';
+      });
+    }
+    
+    // 放大
+    function zoomIn() {
+      let newVal = currentScalePercent + STEP;
+      if (newVal > MAX_SCALE) newVal = MAX_SCALE;
+      if (newVal === currentScalePercent) return;
+      currentScalePercent = newVal;
+      applyZoomToItems();
+    }
+    
+    // 缩小
+    function zoomOut() {
+      let newVal = currentScalePercent - STEP;
+      if (newVal < MIN_SCALE) newVal = MIN_SCALE;
+      if (newVal === currentScalePercent) return;
+      currentScalePercent = newVal;
+      applyZoomToItems();
+    }
+    
+    // 重置缩放
+    function resetZoom() {
+      if (currentScalePercent === 100) return;
+      currentScalePercent = 100;
+      applyZoomToItems();
+    }
+    
+    // 绑定缩放控件事件 (等DOM加载完成后绑定)
+    function bindZoomEvents() {
+      const zoomInBtn = document.getElementById('zoom-in-btn');
+      const zoomOutBtn = document.getElementById('zoom-out-btn');
+      const resetBtn = document.getElementById('zoom-reset-btn');
+      if (zoomInBtn) zoomInBtn.addEventListener('click', zoomIn);
+      if (zoomOutBtn) zoomOutBtn.addEventListener('click', zoomOut);
+      if (resetBtn) resetBtn.addEventListener('click', resetZoom);
+    }
+    
+    // ========================
+    // 加载书籍数据 + 构建书架 + 同步bookItems引用
+    // ========================
+    const container = document.getElementById('book-container');
+    
+    const showLoading = () => {
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'loading-placeholder';
+      loadingDiv.id = 'temp-loading';
+      loadingDiv.textContent = '📚 正在为你准备书架 ...';
+      container.appendChild(loadingDiv);
+    };
+    
+    const removeLoading = () => {
+      const temp = document.getElementById('temp-loading');
+      if(temp) temp.remove();
+    };
+    
+    showLoading();
+    
+    fetch('booklist.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(books => {
+        removeLoading();
+        if (!books || books.length === 0) {
+          container.innerHTML = '<div style="text-align: center; font-size: 24px; color: #666; padding: 50px;">✨ 暂无书籍数据，请稍后添加 ✨</div>';
+          return;
+        }
+        
+        // 使用 DocumentFragment 批量构建
+        const fragment = document.createDocumentFragment();
+        const itemsArray = [];  // 临时存储
+        
+        books.forEach((book, index) => {
+          const bookItem = document.createElement('div');
+          bookItem.className = 'book-item';
+          // 初始宽度由CSS默认或稍后设置，但为了缩放一致性，设置内联初始宽度（取决于当前缩放比例，默认100% -> 220px）
+          // 先设置默认宽度（100%缩放时）
+          bookItem.style.width = DEFAULT_WIDTH + 'px';
+          
+          // 标签容器
+          const labelContainer = document.createElement('div');
+          labelContainer.className = 'book-label-container';
+          const label = document.createElement('div');
+          label.className = 'book-label';
+          label.innerHTML = `
+            <div class="book-label-content">
+              <span class="book-emoji">🟠</span>
+              <span class="book-number">${index + 1}</span>
+            </div>
+          `;
+          labelContainer.appendChild(label);
+          
+          // 图片元素
+          const img = document.createElement('img');
+          img.className = 'book-image';
+          let imageName = (book.pinyin && book.pinyin.trim() !== '') ? book.pinyin : `book_${index + 1}`;
+          const encodedName = encodeURIComponent(imageName);
+          img.src = `assets/photos/${encodedName}.jpg`;
+          img.alt = book.title ? `${book.title} 封面` : `书籍 ${index + 1}`;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          
+          img.onerror = function() {
+            this.onerror = null;
+            this.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 300 450\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f3ede5\'/%3E%3Ctext x=\'50%25\' y=\'45%25\' font-family=\'monospace\' font-size=\'18\' text-anchor=\'middle\' fill=\'%23bfa88a\'%3E📖%3C/text%3E%3Ctext x=\'50%25\' y=\'55%25\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\' fill=\'%239c7e5c\'%3ENo Image%3C/text%3E%3C/svg%3E';
+            this.style.backgroundColor = '#f7f2ea';
+            this.style.objectFit = 'contain';
+          };
+          
+          bookItem.appendChild(labelContainer);
+          bookItem.appendChild(img);
+          
+          if (book.title && book.title.length > 0) {
+            const titleSpan = document.createElement('div');
+            titleSpan.className = 'book-title';
+            let displayTitle = book.title;
+            if (displayTitle.length > 24) displayTitle = displayTitle.slice(0, 22) + '…';
+            titleSpan.textContent = displayTitle;
+            titleSpan.title = book.title;
+            bookItem.appendChild(titleSpan);
+          }
+          
+          fragment.appendChild(bookItem);
+          itemsArray.push(bookItem);
+        });
+        
+        container.appendChild(fragment);
+        
+        // 关键：保存所有book-item的引用供缩放使用
+        bookItems = [...document.querySelectorAll('.book-item')];
+        
+        // 书籍构建完成后，重新应用一次当前缩放（确保所有卡片宽度与当前百分比同步）
+        // 因为默认是100%，但可能有意外，执行一下确保一致性
+        applyZoomToItems();
+        
+        // 图片加载优化（可选）
+        const allImages = document.querySelectorAll('.book-image');
+        let loadedCount = 0;
+        const totalImages = allImages.length;
+        if (totalImages > 0) {
+          const checkAllLoaded = () => {
+            loadedCount++;
+            if (loadedCount === totalImages) {
+              document.body.classList.add('images-loaded');
+            }
+          };
+          allImages.forEach(img => {
+            if (img.complete) {
+              loadedCount++;
+            } else {
+              img.addEventListener('load', checkAllLoaded);
+              img.addEventListener('error', checkAllLoaded);
+            }
+          });
+        }
+        
+        console.log('✨ 书籍加载完成，缩放功能已启用，当前缩放:', currentScalePercent + '%');
+      })
+      .catch(error => {
+        console.error('加载书籍数据时出错:', error);
+        removeLoading();
+        container.innerHTML = '<div style="text-align: center; font-size: 22px; color: #a0522d; background: #fff8f0; margin: 40px auto; padding: 40px; border-radius: 28px; max-width: 80%;">📭 无法加载书籍清单，请检查网络或 booklist.json 文件是否存在。<br><span style="font-size: 16px;">' + error.message + '</span></div>';
+      });
+    
+    // 绑定缩放控件事件 (必须在DOM完全加载后，因为控件在HTML中已存在)
+    // 为了防止异步加载书籍时用户过早点击缩放导致 bookItems 为空，在点击处理时进行保护
+    // 重新增强一下绑定逻辑：确保缩放函数可以安全执行（若bookItems为空暂时无效，书籍加载完成后自动生效）
+    // 改进：在书籍加载完成后，确保bookItems有值，但绑定事件可以提前绑定，最终调用缩放时若bookItems为空则稍后重试或提示
+    // 更优雅：通过监听书籍渲染后的自定义事件，但简单方案：绑定事件时，若缩放时bookItems为空则尝试重新获取
+    function safeApplyZoom() {
+      if (!bookItems.length) {
+        // 尝试重新获取 .book-item（书籍可能加载较慢）
+        const items = document.querySelectorAll('.book-item');
+        if (items.length) {
+          bookItems = [...items];
+          applyZoomToItems();
+        } else {
+          // 如果没有书籍，不执行缩放，但不报错
+          console.warn('尚未加载书籍，缩放暂未生效');
+        }
+      } else {
+        applyZoomToItems();
+      }
+    }
+    
+    // 重写三个函数使其更稳健
+    const originalZoomIn = zoomIn;
+    const originalZoomOut = zoomOut;
+    const originalReset = resetZoom;
+    
+    window.zoomIn = function() {
+      if (!bookItems.length) {
+        const items = document.querySelectorAll('.book-item');
+        if (items.length) bookItems = [...items];
+        else return;
+      }
+      let newVal = currentScalePercent + STEP;
+      if (newVal > MAX_SCALE) newVal = MAX_SCALE;
+      if (newVal === currentScalePercent) return;
+      currentScalePercent = newVal;
+      applyZoomToItems();
+    };
+    
+    window.zoomOut = function() {
+      if (!bookItems.length) {
+        const items = document.querySelectorAll('.book-item');
+        if (items.length) bookItems = [...items];
+        else return;
+      }
+      let newVal = currentScalePercent - STEP;
+      if (newVal < MIN_SCALE) newVal = MIN_SCALE;
+      if (newVal === currentScalePercent) return;
+      currentScalePercent = newVal;
+      applyZoomToItems();
+    };
+    
+    window.resetZoomFn = function() {
+      if (!bookItems.length) {
+        const items = document.querySelectorAll('.book-item');
+        if (items.length) bookItems = [...items];
+        else return;
+      }
+      if (currentScalePercent === 100) return;
+      currentScalePercent = 100;
+      applyZoomToItems();
+    };
+    
+    // 重新绑定增强后的事件
+    function bindRobustEvents() {
+      const zoomInBtn = document.getElementById('zoom-in-btn');
+      const zoomOutBtn = document.getElementById('zoom-out-btn');
+      const resetBtn = document.getElementById('zoom-reset-btn');
+      if (zoomInBtn) {
+        zoomInBtn.removeEventListener('click', zoomIn);
+        zoomInBtn.addEventListener('click', () => window.zoomIn());
+      }
+      if (zoomOutBtn) {
+        zoomOutBtn.removeEventListener('click', zoomOut);
+        zoomOutBtn.addEventListener('click', () => window.zoomOut());
+      }
+      if (resetBtn) {
+        resetBtn.removeEventListener('click', resetZoom);
+        resetBtn.addEventListener('click', () => window.resetZoomFn());
+      }
+    }
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      bindRobustEvents();
+     
+    setTimeout(() => {
+      if (bookItems.length) applyZoomToItems();
+      const percentSpan = document.getElementById('zoom-percent');
+      if (percentSpan && percentSpan.textContent !== currentScalePercent + '%') {
+        percentSpan.textContent = currentScalePercent + '%';
+      }
+    }, 150);
+  </script>
+</body>
+</html>
