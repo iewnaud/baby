@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Videos</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" as="style">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <title>母婴月子中心 · 贴心照护手册</title>
   <style>
     * {
       margin: 0;
@@ -15,623 +12,420 @@
     }
 
     body {
-      margin: 0;
-      font-family: 'Caveat', cursive;
-      background: linear-gradient(135deg, #f5f7fa 0%, #ddeeff 100%);
-      min-height: 100vh;
-      overflow-x: hidden;
-      overflow-y: auto;
+      background: #fef7f0;  /* 暖柔沙色背景 */
+      font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Roboto', sans-serif;
+      padding: 2rem 1.5rem;
     }
 
-    /* 缩放控制栏 - 悬浮优雅 */
-    .zoom-controls {
-      position: sticky;
-      top: 16px;
-      z-index: 200;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-      margin: 12px auto 0 auto;
-      padding: 10px 28px;
-      background: rgba(255, 248, 240, 0.96);
-      backdrop-filter: blur(12px);
-      border-radius: 60px;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-      width: fit-content;
-      border: 1px solid rgba(255, 140, 0, 0.3);
-      font-family: system-ui, 'Segoe UI', 'Caveat', cursive;
+    /* 主容器：类似精装手册 */
+    .handbook {
+      max-width: 1300px;
+      margin: 0 auto;
     }
 
-    .zoom-btn {
-      background: linear-gradient(145deg, #fff2e6, #ffe0cc);
-      border: none;
-      font-size: 1.7rem;
-      font-weight: bold;
-      width: 48px;
-      height: 48px;
-      border-radius: 40px;
-      cursor: pointer;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #b45f2b;
-      font-family: monospace;
+    /* 标题区 */
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #bc6f3c, #e09d6e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.4rem;
+    }
+    .hero p {
+      color: #b37b4b;
+      font-weight: 400;
+      font-size: 0.95rem;
+      border-top: 1px solid #ffdec2;
+      display: inline-block;
+      padding-top: 0.5rem;
     }
 
-    .zoom-btn:active {
-      transform: scale(0.94);
-      background: linear-gradient(145deg, #ffdec5, #ffcfb0);
+    /* 网格布局 — 优雅四象限/多功能卡片区 */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
     }
 
-    .zoom-btn.reset-btn {
-      background: linear-gradient(145deg, #f0e7dc, #e2d4c4);
-      font-size: 1.1rem;
-      width: auto;
-      padding: 0 22px;
-      gap: 6px;
+    /* 通用卡片样式 */
+    .card {
+      background: #ffffffdd;
+      backdrop-filter: blur(0px);
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 12px 28px rgba(100, 50, 20, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+      border: 1px solid #ffe3cf;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 30px rgba(110, 60, 25, 0.12);
+    }
+
+    .card-header {
+      background: #fef0e4;
+      padding: 1.1rem 1.6rem;
+      border-bottom: 2px solid #ffe0c4;
+    }
+    .card-header h2 {
+      font-size: 1.5rem;
       font-weight: 600;
-      color: #6b3e1c;
-    }
-
-    .zoom-value {
-      font-size: 1.4rem;
-      font-weight: bold;
-      background: #fff6ed;
-      padding: 0 14px;
-      border-radius: 40px;
-      line-height: 48px;
-      min-width: 80px;
-      text-align: center;
-      color: #c25d1a;
-      letter-spacing: 1px;
-      font-family: monospace;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 1px 0 rgba(255,255,255,0.8);
-    }
-
-    #quote {
-      position: relative;
-      top: 0;
-      margin: 20px auto 0 auto;
-      transform: none;
-      font-size: 24px;
-      color: #333;
-      width: 90%;
-      max-width: 900px;
-      opacity: 1;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.92);
-      padding: 20px 40px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      z-index: 100;
-      backdrop-filter: blur(2px);
-    }
-
-    .main-text {
-      text-align: center;
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
-    .quote-attribution {
-      text-align: right;
-      font-weight: bold;
-      font-size: 20px;
-      opacity: 0.8;
-      display: block;
-      width: 100%;
-    }
-
-    #video-container {
-      position: relative;
-      width: 100%;
-      padding: 30px 20px 60px 20px;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px 35px;
-      box-sizing: border-box;
-      margin-top: 25px;
-      transition: all 0.2s ease;
+      align-items: center;
+      gap: 10px;
+      color: #a65322;
+    }
+    .card-header h2 span {
+      font-size: 1.7rem;
     }
 
-    .video-item {
-      position: relative;
-      width: 300px;  /* 基础宽度，会被JS动态缩放覆盖 */
-      transition: transform 0.25s ease, width 0.2s cubic-bezier(0.2, 0.9, 0.4, 1);
+    .card-content {
+      padding: 1.4rem 1.6rem 1.8rem 1.6rem;
+    }
+
+    /* 列表样式整洁 */
+    .task-list {
+      list-style: none;
+      padding: 0;
+    }
+    .task-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.7rem 0;
+      border-bottom: 1px dashed #f7e4d4;
+      font-size: 1rem;
+      color: #2c241a;
+    }
+    .task-list li:last-child {
+      border-bottom: none;
+    }
+    .check-bullet {
+      display: inline-flex;
+      width: 24px;
+      height: 24px;
+      background: #fff1e6;
+      border-radius: 30px;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #ce7a3c;
+    }
+    .task-text {
+      flex: 1;
+    }
+    .badge-tip {
+      background: #fff0e0;
+      padding: 2px 10px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #b45f2b;
+    }
+
+    /* 月子餐网格样式 */
+    .meal-grid {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      cursor: pointer;
+      gap: 1rem;
     }
-
-    .video-item:hover {
-      transform: translateY(-6px);
+    .meal-time {
+      background: #fff9f3;
+      border-radius: 1.2rem;
+      padding: 0.8rem 1rem;
     }
-
-    /* 标签容器 - 在图片上方 */
-    .video-label-container {
-      margin-bottom: 12px;
+    .meal-time strong {
+      display: block;
+      font-size: 1rem;
+      color: #c25d1a;
+      margin-bottom: 8px;
+      border-left: 4px solid #ffb26e;
+      padding-left: 12px;
+    }
+    .meal-items {
       display: flex;
-      justify-content: center;
-      width: 100%;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      padding-left: 16px;
+      font-size: 0.9rem;
+      color: #4f3a28;
+    }
+    .meal-items span {
+      background: #ffffff;
+      border-radius: 30px;
+      padding: 4px 12px;
+      box-shadow: 0 1px 2px #ffe0cb;
     }
 
-    .video-label {
-      background: linear-gradient(135deg, #ff8c00, #ff6b00);
-      color: white;
-      font-family: 'Arial', sans-serif;
-      font-weight: bold;
-      font-size: 20px;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      box-shadow: 0 6px 18px rgba(255, 107, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.15);
+    /* 妈妈照护专用：双栏小提醒 */
+    .care-flex {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .care-section {
+      background: #fefaf5;
+      border-radius: 1.2rem;
+      padding: 0.8rem 1rem;
+    }
+    .care-section h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ad6d3e;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      z-index: 10;
-      transition: all 0.2s ease;
-    }
-
-    .video-label:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 22px rgba(255, 107, 0, 0.5);
-    }
-
-    .video-label-content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       gap: 6px;
     }
-
-    .video-emoji {
-      font-size: 18px;
-      line-height: 1;
+    .reminder-list {
+      list-style: none;
+    }
+    .reminder-list li {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .reminder-list li::before {
+      content: "🌸";
+      font-size: 0.75rem;
     }
 
-    .video-number {
-      font-size: 22px;
-      line-height: 1;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    /* 用药/维生素特殊卡片 */
+    .supplement-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
     }
-
-    /* 图片容器：保证完整显示且不裁剪 */
-    .video-image {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 9;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      transition: all 0.2s ease;
-      background-color: #faf3e0;
-      display: block;
-    }
-
-    .video-image:hover {
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-      transform: scale(1.01);
-    }
-
-    .video-image-wrapper {
-      width: 100%;
-      background: linear-gradient(145deg, #f5ede3, #e8dfd3);
-      border-radius: 12px;
-      padding: 4px;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-    }
-
-    .video-title {
-      font-size: 18px;
-      margin-top: 10px;
-      font-weight: 500;
-      color: #3e3a39;
+    .supp-item {
+      background: #fef5e8;
+      border-radius: 1rem;
+      padding: 0.6rem 1rem;
+      flex: 1;
+      min-width: 110px;
       text-align: center;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-family: 'Caveat', cursive;
-      letter-spacing: 0.5px;
     }
 
-    /* 响应式调整保留，但缩放时会动态覆盖宽度，因此基础媒体查询仅作为降级 */
-    @media (max-width: 900px) {
-      #quote {
-        font-size: 20px;
-        padding: 16px 30px;
-        margin-top: 16px;
+    hr {
+      margin: 1rem 0;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, #ffe1c6, transparent);
+    }
+
+    /* 完全响应式：手机变成单列 */
+    @media (max-width: 780px) {
+      body {
+        padding: 1rem;
       }
-      .quote-attribution {
-        font-size: 18px;
+      .dashboard {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
       }
-      .video-label {
-        width: 52px;
-        height: 52px;
-        font-size: 18px;
+      .card-header h2 {
+        font-size: 1.3rem;
       }
-      .video-number {
-        font-size: 20px;
-      }
-      .video-emoji {
-        font-size: 16px;
-      }
-      .video-title {
-        font-size: 16px;
+      .card-content {
+        padding: 1.2rem;
       }
     }
 
-    @media (max-width: 640px) {
-      #video-container {
-        gap: 32px 20px;
-        padding: 20px 16px 50px 16px;
-      }
-      .video-label {
-        width: 48px;
-        height: 48px;
-        font-size: 16px;
-      }
-      .video-number {
-        font-size: 18px;
-      }
-      .video-emoji {
-        font-size: 14px;
-      }
-      .video-title {
-        font-size: 14px;
-        margin-top: 8px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .video-label {
-        width: 44px;
-        height: 44px;
-      }
-      .video-number {
-        font-size: 17px;
-      }
-      #quote {
-        font-size: 18px;
-        padding: 12px 20px;
-      }
-      .quote-attribution {
-        font-size: 15px;
-      }
-      .video-title {
-        font-size: 13px;
-      }
-    }
-    
-    .loading-placeholder {
+    /* 优雅装饰 */
+    .footnote {
       text-align: center;
-      padding: 40px;
-      font-size: 22px;
-      color: #7f8c8d;
-      width: 100%;
-    }
-    
-    html {
-      scroll-behavior: smooth;
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      color: #c78b56;
+      border-top: 1px solid #fee2ce;
+      padding-top: 1.5rem;
     }
   </style>
 </head>
 <body>
-  <div id="quote">
-    <div class="main-text">
-      Change later.
-    </div>
-    <div class="quote-attribution">
-      &mdash; Sheldon, <em>Bigbang</em>
-    </div>
+<div class="handbook">
+  <div class="hero">
+    <h1>🍼 月子时光 · 双人照护手册</h1>
+    <p>宝宝护理 + 妈妈康复 | 每日温馨清单 & 营养膳食</p>
   </div>
 
-  <!-- 缩放控制栏：新功能1 & 新功能2（重置） -->
-  <div class="zoom-controls">
-    <button class="zoom-btn" id="zoom-out-btn" title="缩小10%">−</button>
-    <span class="zoom-value" id="zoom-percent">100%</span>
-    <button class="zoom-btn" id="zoom-in-btn" title="放大10%">+</button>
-    <button class="zoom-btn reset-btn" id="zoom-reset-btn" title="重置为默认大小">↺</button>
-  </div>
+  <div class="dashboard">
+    
+    <!-- 卡片1：宝宝护理清单 (原有升级) -->
+    <div class="card">
+      <div class="card-header">
+        <h2><span>👶</span> 宝宝护理清单</h2>
+      </div>
+      <div class="card-content">
+        <ul class="task-list">
+          <li><span class="check-bullet">🍼</span><span class="task-text">喂奶 + 拍嗝（每次哺乳后竖抱10-15分钟）</span></li>
+          <li><span class="check-bullet">🧷</span><span class="task-text">换尿布（观察便便颜色 / 屁屁霜）</span></li>
+          <li><span class="check-bullet">🧴</span><span class="task-text">涂身体乳 / 抚触按摩（促进感知发育）</span></li>
+          <li><span class="check-bullet">🛁</span><span class="task-text">洗澡（室温26-28℃，水温37-38℃）</span></li>
+          <li><span class="check-bullet">🌡️</span><span class="task-text">监测体温/脐带护理（75%酒精消毒）</span></li>
+          <li><span class="check-bullet">💤</span><span class="task-text">睡眠记录 + 黄昏闹安抚（白噪音/襁褓）</span></li>
+        </ul>
+        <div class="badge-tip" style="display: inline-block; margin-top: 12px;">✨ 每日必做 · 打勾追踪</div>
+      </div>
+    </div>
 
-  <div id="video-container"></div>
+    <!-- 卡片2：妈妈月子照护 (重点) -->
+    <div class="card">
+      <div class="card-header">
+        <h2><span>🤱</span> 妈妈 · 月子照护</h2>
+      </div>
+      <div class="card-content">
+        <div class="care-flex">
+          <div class="care-section">
+            <h3>💧 身体恢复 </h3>
+            <ul class="reminder-list">
+              <li>勤换产妇卫生巾，观察恶露变化</li>
+              <li>剖腹产伤口/顺产侧切保持干燥，遵医嘱消毒</li>
+              <li>产后束腹带使用时间（饭后半小时取下）</li>
+              <li>凯格尔运动（每天2组，每组10次）</li>
+            </ul>
+          </div>
+          <div class="care-section">
+            <h3>🛌 休息 & 情绪</h3>
+            <ul class="reminder-list">
+              <li>保证2～3小时深睡间隔（跟随宝宝作息）</li>
+              <li>防抑郁关怀：听音乐/和家人聊天/写日记</li>
+              <li>避免提重物、久站，注意腰部保暖</li>
+              <li>乳房护理：哺乳后涂抹羊脂膏，预防皲裂</li>
+            </ul>
+          </div>
+          <div class="care-section">
+            <h3>🩺 产后复查提醒</h3>
+            <ul class="reminder-list">
+              <li>产后42天：盆底肌评估 + 腹直肌检查</li>
+              <li>血常规/微量元素检测（遵医嘱补充铁剂）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <script>
-    // ========================
-    // 缩放功能核心 (手动缩放图片大小，范围 50% ~ 200%，步长10%)
-    // 并自动重新排列布局 (通过动态改变 .video-item 的宽度)
-    // ========================
-    let currentScalePercent = 100;      // 初始 100%
-    const DEFAULT_WIDTH = 220;           // 基准宽度 (px) 与 CSS .video-item 初始一致
-    const MIN_SCALE = 50;
-    const MAX_SCALE = 200;
-    const STEP = 10;
-    
-    // 获取容器和待更新的元素集合
-    let videoItems = [];          // 存储所有 .video-item 元素引用
-    
-    // 更新所有影视卡片宽度
-    function applyZoomToItems() {
-      if (!videoItems.length) return;
-      const newWidth = (DEFAULT_WIDTH * currentScalePercent) / 100;
-      // 使用 requestAnimationFrame 保证流畅布局重排
-      requestAnimationFrame(() => {
-        for (let item of videoItems) {
-          item.style.width = newWidth + 'px';
-        }
-        // 更新百分比文本显示
-        const percentSpan = document.getElementById('zoom-percent');
-        if (percentSpan) percentSpan.textContent = currentScalePercent + '%';
-      });
-    }
-    
-    // 放大
-    function zoomIn() {
-      let newVal = currentScalePercent + STEP;
-      if (newVal > MAX_SCALE) newVal = MAX_SCALE;
-      if (newVal === currentScalePercent) return;
-      currentScalePercent = newVal;
-      applyZoomToItems();
-    }
-    
-    // 缩小
-    function zoomOut() {
-      let newVal = currentScalePercent - STEP;
-      if (newVal < MIN_SCALE) newVal = MIN_SCALE;
-      if (newVal === currentScalePercent) return;
-      currentScalePercent = newVal;
-      applyZoomToItems();
-    }
-    
-    // 重置缩放
-    function resetZoom() {
-      if (currentScalePercent === 100) return;
-      currentScalePercent = 100;
-      applyZoomToItems();
-    }
-    
-    // 绑定缩放控件事件 (等DOM加载完成后绑定)
-    function bindZoomEvents() {
-      const zoomInBtn = document.getElementById('zoom-in-btn');
-      const zoomOutBtn = document.getElementById('zoom-out-btn');
-      const resetBtn = document.getElementById('zoom-reset-btn');
-      if (zoomInBtn) zoomInBtn.addEventListener('click', zoomIn);
-      if (zoomOutBtn) zoomOutBtn.addEventListener('click', zoomOut);
-      if (resetBtn) resetBtn.addEventListener('click', resetZoom);
-    }
-    
-    // ========================
-    // 加载影视数据 + 构建影视夹 + 同步videoItems引用
-    // ========================
-    const container = document.getElementById('video-container');
-    
-    const showLoading = () => {
-      const loadingDiv = document.createElement('div');
-      loadingDiv.className = 'loading-placeholder';
-      loadingDiv.id = 'temp-loading';
-      loadingDiv.textContent = '📚 正在为你准备影视架 ...';
-      container.appendChild(loadingDiv);
-    };
-    
-    const removeLoading = () => {
-      const temp = document.getElementById('temp-loading');
-      if(temp) temp.remove();
-    };
-    
-    showLoading();
-    
-    fetch('videolist.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(videos => {
-        removeLoading();
-        if (!videos || videos.length === 0) {
-          container.innerHTML = '<div style="text-align: center; font-size: 24px; color: #666; padding: 50px;">✨ 暂无影视数据，请稍后添加 ✨</div>';
-          return;
-        }
-        
-        // 使用 DocumentFragment 批量构建
-        const fragment = document.createDocumentFragment();
-        const itemsArray = [];  // 临时存储
-        
-        videos.forEach((video, index) => {
-          const videoItem = document.createElement('div');
-          videoItem.className = 'video-item';
-          // 初始宽度由CSS默认或稍后设置，但为了缩放一致性，设置内联初始宽度（取决于当前缩放比例，默认100% -> 220px）
-          // 先设置默认宽度（100%缩放时）
-          videoItem.style.width = DEFAULT_WIDTH + 'px';
-          
-          // 标签容器
-          const labelContainer = document.createElement('div');
-          labelContainer.className = 'video-label-container';
-          const label = document.createElement('div');
-          label.className = 'video-label';
-          label.innerHTML = `
-            <div class="video-label-content">
-              <span class="video-emoji">🟠</span>
-              <span class="video-number">${index + 1}</span>
+    <!-- 卡片3：月子餐清单 (营养膳食安排) -->
+    <div class="card">
+      <div class="card-header">
+        <h2><span>🍲</span> 月子餐 · 四阶段食养</h2>
+      </div>
+      <div class="card-content">
+        <div class="meal-grid">
+          <div class="meal-time">
+            <strong>🌅 早餐 (7:30-8:30)</strong>
+            <div class="meal-items">
+              <span>红枣小米粥</span><span>全麦馒头</span><span>麻油猪肝</span><span>煮鸡蛋</span><span>清炒时蔬</span>
             </div>
-          `;
-          labelContainer.appendChild(label);
-          
-          // 图片元素
-          const img = document.createElement('img');
-          img.className = 'video-image';
-          let imageName = (video.pinyin && video.pinyin.trim() !== '') ? video.pinyin : `video_${index + 1}`;
-          const encodedName = encodeURIComponent(imageName);
-          img.src = `assets/photos/${encodedName}.jpg`;
-          img.alt = video.title ? `${video.title} 封面` : `书籍 ${index + 1}`;
-          img.loading = 'lazy';
-          img.decoding = 'async';
-          
-          img.onerror = function() {
-            this.onerror = null;
-            this.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 300 450\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%23f3ede5\'/%3E%3Ctext x=\'50%25\' y=\'45%25\' font-family=\'monospace\' font-size=\'18\' text-anchor=\'middle\' fill=\'%23bfa88a\'%3E📖%3C/text%3E%3Ctext x=\'50%25\' y=\'55%25\' font-family=\'monospace\' font-size=\'14\' text-anchor=\'middle\' fill=\'%239c7e5c\'%3ENo Image%3C/text%3E%3C/svg%3E';
-            this.style.backgroundColor = '#f7f2ea';
-            this.style.objectFit = 'contain';
-          };
-          
-          videoItem.appendChild(labelContainer);
-          videoItem.appendChild(img);
-          
-          if (video.title && video.title.length > 0) {
-            const titleSpan = document.createElement('div');
-            titleSpan.className = 'video-title';
-            let displayTitle = video.title;
-            if (displayTitle.length > 24) displayTitle = displayTitle.slice(0, 22) + '…';
-            titleSpan.textContent = displayTitle;
-            titleSpan.title = video.title;
-            videoItem.appendChild(titleSpan);
-          }
-          
-          fragment.appendChild(videoItem);
-          itemsArray.push(videoItem);
-        });
-        
-        container.appendChild(fragment);
-        
-        // 关键：保存所有video-item的引用供缩放使用
-        videoItems = [...document.querySelectorAll('.video-item')];
-        
-        // 书籍构建完成后，重新应用一次当前缩放（确保所有卡片宽度与当前百分比同步）
-        // 因为默认是100%，但可能有意外，执行一下确保一致性
-        applyZoomToItems();
-        
-        // 图片加载优化（可选）
-        const allImages = document.querySelectorAll('.video-image');
-        let loadedCount = 0;
-        const totalImages = allImages.length;
-        if (totalImages > 0) {
-          const checkAllLoaded = () => {
-            loadedCount++;
-            if (loadedCount === totalImages) {
-              document.body.classList.add('images-loaded');
-            }
-          };
-          allImages.forEach(img => {
-            if (img.complete) {
-              loadedCount++;
-            } else {
-              img.addEventListener('load', checkAllLoaded);
-              img.addEventListener('error', checkAllLoaded);
-            }
-          });
-        }
-        
-        console.log('✨ 书籍加载完成，缩放功能已启用，当前缩放:', currentScalePercent + '%');
-      })
-      .catch(error => {
-        console.error('加载书籍数据时出错:', error);
-        removeLoading();
-        container.innerHTML = '<div style="text-align: center; font-size: 22px; color: #a0522d; background: #fff8f0; margin: 40px auto; padding: 40px; border-radius: 28px; max-width: 80%;">📭 无法加载影视清单，请检查网络或 videolist.json 文件是否存在。<br><span style="font-size: 16px;">' + error.message + '</span></div>';
-      });
-    
-    // 绑定缩放控件事件 (必须在DOM完全加载后，因为控件在HTML中已存在)
-    // 为了防止异步加载书籍时用户过早点击缩放导致 videoItems 为空，在点击处理时进行保护
-    // 重新增强一下绑定逻辑：确保缩放函数可以安全执行（若videoItems为空暂时无效，书籍加载完成后自动生效）
-    // 改进：在书籍加载完成后，确保videoItems有值，但绑定事件可以提前绑定，最终调用缩放时若videoItems为空则稍后重试或提示
-    // 更优雅：通过监听书籍渲染后的自定义事件，但简单方案：绑定事件时，若缩放时videoItems为空则尝试重新获取
-    function safeApplyZoom() {
-      if (!videoItems.length) {
-        // 尝试重新获取 .video-item（书籍可能加载较慢）
-        const items = document.querySelectorAll('.video-item');
-        if (items.length) {
-          videoItems = [...items];
-          applyZoomToItems();
-        } else {
-          // 如果没有书籍，不执行缩放，但不报错
-          console.warn('尚未加载书籍，缩放暂未生效');
-        }
-      } else {
-        applyZoomToItems();
-      }
-    }
-    
-    // 重写三个函数使其更稳健
-    const originalZoomIn = zoomIn;
-    const originalZoomOut = zoomOut;
-    const originalReset = resetZoom;
-    
-    window.zoomIn = function() {
-      if (!videoItems.length) {
-        const items = document.querySelectorAll('.video-item');
-        if (items.length) videoItems = [...items];
-        else return;
-      }
-      let newVal = currentScalePercent + STEP;
-      if (newVal > MAX_SCALE) newVal = MAX_SCALE;
-      if (newVal === currentScalePercent) return;
-      currentScalePercent = newVal;
-      applyZoomToItems();
-    };
-    
-    window.zoomOut = function() {
-      if (!videoItems.length) {
-        const items = document.querySelectorAll('.video-item');
-        if (items.length) videoItems = [...items];
-        else return;
-      }
-      let newVal = currentScalePercent - STEP;
-      if (newVal < MIN_SCALE) newVal = MIN_SCALE;
-      if (newVal === currentScalePercent) return;
-      currentScalePercent = newVal;
-      applyZoomToItems();
-    };
-    
-    window.resetZoomFn = function() {
-      if (!videoItems.length) {
-        const items = document.querySelectorAll('.video-item');
-        if (items.length) videoItems = [...items];
-        else return;
-      }
-      if (currentScalePercent === 100) return;
-      currentScalePercent = 100;
-      applyZoomToItems();
-    };
-    
-    // 重新绑定增强后的事件
-    function bindRobustEvents() {
-      const zoomInBtn = document.getElementById('zoom-in-btn');
-      const zoomOutBtn = document.getElementById('zoom-out-btn');
-      const resetBtn = document.getElementById('zoom-reset-btn');
-      if (zoomInBtn) {
-        zoomInBtn.removeEventListener('click', zoomIn);
-        zoomInBtn.addEventListener('click', () => window.zoomIn());
-      }
-      if (zoomOutBtn) {
-        zoomOutBtn.removeEventListener('click', zoomOut);
-        zoomOutBtn.addEventListener('click', () => window.zoomOut());
-      }
-      if (resetBtn) {
-        resetBtn.removeEventListener('click', resetZoom);
-        resetBtn.addEventListener('click', () => window.resetZoomFn());
-      }
-    }
-    
-    window.addEventListener('DOMContentLoaded', () => {
-      bindRobustEvents();
-     
-    setTimeout(() => {
-      if (videoItems.length) applyZoomToItems();
-      const percentSpan = document.getElementById('zoom-percent');
-      if (percentSpan && percentSpan.textContent !== currentScalePercent + '%') {
-        percentSpan.textContent = currentScalePercent + '%';
-      }
-    }, 150);
-  });  
+          </div>
+          <div class="meal-time">
+            <strong>☀️ 午餐 (11:30-12:30)</strong>
+            <div class="meal-items">
+              <span>五谷饭</span><span>麻油鸡/鲫鱼汤</span><span>清炒西兰花</span><span>杜仲腰花</span><span>红豆汤</span>
+            </div>
+          </div>
+          <div class="meal-time">
+            <strong>🍎 加餐 (15:00-15:30)</strong>
+            <div class="meal-items">
+              <span>木瓜炖奶</span><span>水果羹</span><span>黑芝麻糊</span><span>全麦饼干</span>
+            </div>
+          </div>
+          <div class="meal-time">
+            <strong>🌙 晚餐 (17:30-18:30)</strong>
+            <div class="meal-items">
+              <span>紫米粥/杂粮饭</span><span>香菇乌鸡汤</span><span>清蒸鲈鱼</span><span>上汤娃娃菜</span><span>药膳排骨</span>
+            </div>
+          </div>
+          <div class="meal-time">
+            <strong>🌜 夜宵 (21:00)</strong>
+            <div class="meal-items">
+              <span>热牛奶/酒酿圆子</span><span>养身饮(桂圆红枣茶)</span>
+            </div>
+          </div>
+        </div>
+        <div class="badge-tip" style="margin-top: 12px; display: block; text-align: center;">📌 原则：一排二调三补四养，少盐少油，多摄入蛋白质</div>
+      </div>
+    </div>
 
-  </script>
+    <!-- 卡片4：喂养+用药+维生素记录 (合并重要提醒) -->
+    <div class="card">
+      <div class="card-header">
+        <h2><span>📋</span> 喂养记录 & 营养补充</h2>
+      </div>
+      <div class="card-content">
+        <!-- 喂养时段模拟 -->
+        <ul class="task-list" style="margin-bottom: 12px;">
+          <li><span class="check-bullet">🍼</span><span class="task-text"><strong>母乳/配方奶记录</strong> — 按需哺乳，每日约8~12次</span></li>
+          <li><span class="check-bullet">💧</span><span class="task-text"><strong>维生素D3</strong> 宝宝：每天1滴 (出生15天后)</span></li>
+          <li><span class="check-bullet">🌸</span><span class="task-text"><strong>妈妈复合维生素</strong> + 钙片（哺乳期持续）</span></li>
+        </ul>
+        <div class="supplement-grid">
+          <div class="supp-item">🧬 益生菌(宝宝) <br> <span style="font-size:0.75rem;">预防肠胀气</span></div>
+          <div class="supp-item">🩸 铁剂(妈妈) <br> <span style="font-size:0.75rem;">搭配维C吸收好</span></div>
+          <div class="supp-item">🥛 液体钙 <br> <span style="font-size:0.75rem;">夜间睡前服用</span></div>
+        </div>
+        <hr>
+        <div style="background: #fef4e9; border-radius: 20px; padding: 12px; margin-top: 8px;">
+          <p style="font-weight: 500; display: flex; gap: 6px;"><span>⏰</span> 日常用药提醒：</p>
+          <p style="font-size: 0.85rem; margin-top: 8px;">✔ 妈妈：益母草颗粒/生化汤(遵医嘱排恶露)<br>
+          ✔ 如有会阴疼痛或便秘，咨询医生使用乳果糖<br>
+          ✔ 喂奶前洗手，乳头皲裂可使用羊脂膏</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 额外加一个扩展卡: 每日快速备忘 (最佳布局, 横跨两列? 但为了整洁, 再加一张浮动记录卡单独行?  使用grid自动换行，第5张会自动换到新行，保留干净）-->
+    <!-- 加第五张卡 —— 宝宝日常作息 & 妈妈情绪笔记，使其更完整 -->
+  </div>
+  
+  <!-- 第二行独特舒适区：产后康复/月子运动与备忘 (增强月子体验) -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin-top: 1.8rem;">
+    <div class="card">
+      <div class="card-header">
+        <h2><span>🧘</span> 温和产褥操 & 禁忌</h2>
+      </div>
+      <div class="card-content">
+        <ul class="reminder-list" style="list-style: none;">
+          <li>✔ 腹式呼吸练习（顺产第3天开始，剖腹产咨询医生）</li>
+          <li>✔ 脚踝滑动、抬臀运动（促进血液循环）</li>
+          <li>✔ 避免长时间弯腰、提重物、爬楼梯</li>
+          <li>✔ 产后第一周不喝油腻浓汤，预防堵奶</li>
+        </ul>
+        <div style="background:#fff5ec; border-radius: 1rem; padding: 12px; margin-top: 12px;">
+          💬 情绪手札：每天记录一件小确幸，减少产后焦虑。爸爸多鼓励，分担夜间喂奶(瓶喂)。
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2><span>📝</span> 每日速查 · 宝宝+妈妈同步清单</h2>
+      </div>
+      <div class="card-content">
+        <div style="display: flex; flex-direction: column; gap: 0.7rem;">
+          <div><span style="background:#ffede2; padding:4px 12px; border-radius: 30px;">✅ 早晨检查</span>  🌡️宝宝体温 / 妈妈伤口观察</div>
+          <div><span style="background:#ffede2; padding:4px 12px; border-radius: 30px;">✅ 午后任务</span>  🛁宝宝洗澡 + 妈妈做盆底肌训练</div>
+          <div><span style="background:#ffede2; padding:4px 12px; border-radius: 30px;">✅ 晚间照护</span>  🧴抚触 + 妈妈泡脚（恶露减少后可）</div>
+          <div><span style="background:#ffede2; padding:4px 12px; border-radius: 30px;">✅ 睡眠同步</span>  😴宝宝睡，妈妈跟着补觉（拒绝手机熬夜）</div>
+        </div>
+        <hr>
+        <p style="font-size:0.85rem; color:#aa6f42;">🍃 月子是女人第二次生命，请像照料宝宝一样细心照顾自己。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    🌟 可以根据每日实际完成情况打勾（打印或电子标注）｜月子餐可根据个人体质微调，多喝温水<br>
+    母婴同室温馨呵护，如有不适立即联系医生。
+  </div>
+</div>
 </body>
 </html>
