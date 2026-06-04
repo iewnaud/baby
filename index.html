@@ -17,16 +17,15 @@
       background: #fef7f0;
       font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Roboto', Helvetica, sans-serif;
       padding: 1.2rem 1rem 2rem;
-      /* 手机舒适底色 */
     }
 
-    /* 手机优先容器：宽屏最大宽度560px，保持卡片呼吸感 */
+    /* 手机优先容器 */
     .handbook {
       max-width: 560px;
       margin: 0 auto;
     }
 
-    /* 头部欢迎区 — 融入宝宝名字 */
+    /* 头部欢迎区 */
     .hero {
       text-align: center;
       margin-bottom: 1.5rem;
@@ -63,14 +62,14 @@
       padding-top: 0.5rem;
     }
 
-    /* 四大模块卡片列表 (垂直流) */
+    /* 四大模块卡片列表 */
     .dashboard {
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
     }
 
-    /* 卡片样式 — 手机圆润大间距 */
+    /* 卡片样式 */
     .card {
       background: white;
       border-radius: 1.8rem;
@@ -163,10 +162,6 @@
       font-size: 0.82rem;
       color: #5e3e26;
       line-height: 1.45;
-    }
-    .inline-tips i {
-      font-style: normal;
-      display: inline-block;
     }
 
     /* 月子餐专属 */
@@ -270,14 +265,6 @@
       border-top: 1px solid #fee2ce;
       padding-top: 1rem;
     }
-    /* 小点缀 */
-    .baby-symbol {
-      font-size: 0.85rem;
-      display: inline-block;
-      background: #fff2e6;
-      padding: 2px 12px;
-      border-radius: 30px;
-    }
   </style>
 </head>
 <body>
@@ -290,7 +277,7 @@
 
   <div class="dashboard">
     
-    <!-- 模块1：宝宝护理（含注意事项 + 宝宝名字场景化） -->
+    <!-- 模块1：宝宝护理 -->
     <div class="card">
       <div class="card-header">
         <h2><span>👶</span> 宝宝护理 · 照护</h2>
@@ -316,7 +303,7 @@
       </div>
     </div>
 
-    <!-- 模块2：妈妈护理（整合产后恢复 + 产褥运动 + 情绪） -->
+    <!-- 模块2：妈妈护理 -->
     <div class="card">
       <div class="card-header">
         <h2><span>🤱</span> 妈妈护理 · 产褥恢复</h2>
@@ -343,7 +330,7 @@
       </div>
     </div>
 
-    <!-- 模块3：一周不重样月子餐（带上下翻页，手机友好） -->
+    <!-- 模块3：一周月子餐 -->
     <div class="card">
       <div class="card-header">
         <h2><span>🍲</span> 七日月子餐 · 轮换</h2>
@@ -361,15 +348,15 @@
       </div>
     </div>
 
-    <!-- 模块4：待买清单（最终推荐，奶瓶/奶粉/收纳/衣架/书籍/衣服等） -->
+    <!-- 模块4：待买清单（已添加奶瓶容量，移除奶粉标签） -->
     <div class="card">
       <div class="card-header">
         <h2><span>🛒</span> 待买清单 · 最终推荐</h2>
       </div>
       <div class="card-content">
         <ul class="shopping-list">
-          <li><span class="bullet-icon">🍼</span> <strong>奶瓶</strong> — PPSU材质（轻便耐热/不含BPA）<span class="rec-badge">hegen / 贝亲宽口径</span></li>
-          <li><span class="bullet-icon">🥛</span> <strong>奶粉</strong> — 皇家美素佳儿（含乳铁蛋白，适合初生）<span class="rec-badge">口碑优选</span></li>
+          <li><span class="bullet-icon">🍼</span> <strong>奶瓶</strong> — PPSU材质，宽口径，<strong>160ml + 240ml</strong> 各准备1-2个<span class="rec-badge">hegen / 贝亲</span></li>
+          <li><span class="bullet-icon">🥛</span> <strong>奶粉</strong> — 皇家美素佳儿（含乳铁蛋白，适合初生）</li>
           <li><span class="bullet-icon">📦</span> <strong>衣柜收纳盒</strong> — 牛津布或透明抽屉式，区分宝宝衣物</li>
           <li><span class="bullet-icon">👕</span> <strong>宝宝衣架</strong> — 伸缩防滑晾衣架（可调节肩宽）</li>
           <li><span class="bullet-icon">📚</span> <strong>护理参考书</strong> — 《金牌月嫂教你坐月子》+《新生儿婴儿护理百科全书》</li>
@@ -386,12 +373,12 @@
   </div>
 
   <div class="footnote">
-    🌟 段翼陈家庭专属手册 
+    🌟 段翼陈家庭专属手册 · 奶瓶容量建议：160ml适合新生儿，240ml满月后使用
   </div>
 </div>
 
 <script>
-  // ======================= 一周月子餐数据（七日不重样，精细到每日） =======================
+  // 一周月子餐数据（七日不重样）
   const weeklyMenu = [
     { dayName: "第1天 · 周一", meals: {
       breakfast: ["红枣小米粥", "全麦馒头", "麻油猪肝", "煮鸡蛋", "清炒时蔬"],
