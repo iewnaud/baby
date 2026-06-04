@@ -2,78 +2,94 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>母婴月子手册 · 精简照护</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>段翼陈宝宝 · 月子照护手册</title>
   <link rel="icon" type="image/png" href="baby_icon.png">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       background: #fef7f0;
-      font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Roboto', sans-serif;
-      padding: 2rem 1.5rem;
+      font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Roboto', Helvetica, sans-serif;
+      padding: 1.2rem 1rem 2rem;
+      /* 手机舒适底色 */
     }
 
+    /* 手机优先容器：宽屏最大宽度560px，保持卡片呼吸感 */
     .handbook {
-      max-width: 1400px;
+      max-width: 560px;
       margin: 0 auto;
     }
 
+    /* 头部欢迎区 — 融入宝宝名字 */
     .hero {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 248, 235, 0.7);
+      border-radius: 2rem;
+      padding: 1rem 0.8rem;
     }
     .hero h1 {
-      font-size: 2rem;
-      font-weight: 500;
+      font-size: 1.7rem;
+      font-weight: 600;
       background: linear-gradient(135deg, #bc6f3c, #e09d6e);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.3px;
+    }
+    .baby-name {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #c2713a;
+      background: #fff3e8;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      margin-top: 0.3rem;
     }
     .hero p {
       color: #b37b4b;
-      font-size: 0.95rem;
+      font-size: 0.8rem;
+      margin-top: 8px;
       border-top: 1px solid #ffdec2;
       display: inline-block;
       padding-top: 0.5rem;
     }
 
-    /* 三列网格布局（大屏），小屏自动变单列 */
+    /* 四大模块卡片列表 (垂直流) */
     .dashboard {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    /* 通用卡片样式 */
-    .card {
-      background: white;
-      border-radius: 1.5rem;
-      box-shadow: 0 8px 20px rgba(100, 50, 20, 0.06);
-      transition: transform 0.2s, box-shadow 0.2s;
-      overflow: hidden;
-      border: 1px solid #ffe3cf;
       display: flex;
       flex-direction: column;
+      gap: 1.2rem;
     }
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(110, 60, 25, 0.1);
+
+    /* 卡片样式 — 手机圆润大间距 */
+    .card {
+      background: white;
+      border-radius: 1.8rem;
+      box-shadow: 0 6px 16px rgba(100, 50, 20, 0.06);
+      overflow: hidden;
+      border: 1px solid #ffe3cf;
+      transition: transform 0.1s;
+    }
+    .card:active {
+      transform: scale(0.99);
     }
 
     .card-header {
       background: #fef0e4;
-      padding: 1rem 1.4rem;
+      padding: 0.9rem 1.2rem;
       border-bottom: 2px solid #ffe0c4;
     }
     .card-header h2 {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -85,70 +101,98 @@
     }
 
     .card-content {
-      padding: 1.2rem 1.4rem 1.5rem;
-      flex: 1;
+      padding: 1rem 1.2rem 1.3rem;
     }
 
-    /* 列表样式 */
-    .task-list, .shopping-list {
+    /* 清单样式 */
+    .checklist {
       list-style: none;
     }
-    .task-list li, .shopping-list li {
+    .checklist li {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0.6rem 0;
-      border-bottom: 1px dashed #f7e4d4;
-      font-size: 0.95rem;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid #f7e4d4;
+      font-size: 0.9rem;
       color: #2c241a;
+      line-height: 1.35;
     }
-    .task-list li:last-child, .shopping-list li:last-child {
+    .checklist li:last-child {
       border-bottom: none;
     }
-    .check-bullet {
+    .bullet-icon {
       display: inline-flex;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       background: #fff1e6;
       border-radius: 30px;
       align-items: center;
       justify-content: center;
       font-size: 0.85rem;
       color: #ce7a3c;
+      flex-shrink: 0;
+      margin-top: 1px;
     }
-    .tag {
+    .tag-sm {
       background: #fff0e0;
       padding: 2px 8px;
-      border-radius: 20px;
-      font-size: 0.7rem;
+      border-radius: 30px;
+      font-size: 0.65rem;
       font-weight: 500;
       color: #b45f2b;
       margin-left: 6px;
       white-space: nowrap;
     }
+    .highlight-block {
+      background: #fefaf5;
+      border-radius: 1.2rem;
+      padding: 0.7rem 1rem;
+      margin-top: 0.9rem;
+    }
+    .highlight-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #bc6f3c;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .inline-tips {
+      font-size: 0.82rem;
+      color: #5e3e26;
+      line-height: 1.45;
+    }
+    .inline-tips i {
+      font-style: normal;
+      display: inline-block;
+    }
 
-    /* 月子餐导航 + 菜单 */
+    /* 月子餐专属 */
     .week-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: #fff8f0;
-      padding: 6px 12px;
+      padding: 4px 10px;
       border-radius: 60px;
-      margin-top: 6px;
+      margin-top: 8px;
     }
     .week-nav button {
       background: #f0e2d4;
       border: none;
-      font-size: 1.2rem;
-      width: 32px;
-      height: 32px;
+      font-size: 1.1rem;
+      width: 34px;
+      height: 34px;
       border-radius: 40px;
       cursor: pointer;
       color: #a65322;
       font-weight: bold;
+      transition: 0.1s;
     }
     .week-nav button:active {
+      background: #e2cfbc;
       transform: scale(0.94);
     }
     .day-indicator {
@@ -156,7 +200,7 @@
       background: white;
       padding: 4px 12px;
       border-radius: 40px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #bc6f3c;
     }
     .meal-grid {
@@ -168,22 +212,22 @@
     .meal-time {
       background: #fff9f3;
       border-radius: 1rem;
-      padding: 0.6rem 0.9rem;
+      padding: 0.55rem 0.9rem;
     }
     .meal-time strong {
       display: block;
       font-size: 0.85rem;
       color: #c25d1a;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       border-left: 3px solid #ffb26e;
       padding-left: 10px;
     }
     .meal-items {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 12px;
+      gap: 6px 10px;
       padding-left: 13px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #4f3a28;
     }
     .meal-items span {
@@ -193,212 +237,161 @@
       box-shadow: 0 1px 2px #ffe0cb;
     }
 
-    /* 提醒/重点区块 */
-    .highlight-block {
-      background: #fefaf5;
-      border-radius: 1rem;
-      padding: 0.7rem 1rem;
-      margin-top: 0.8rem;
-    }
-    .reminder-list {
+    /* 待买清单 */
+    .shopping-list {
       list-style: none;
     }
-    .reminder-list li {
-      margin-bottom: 6px;
-      font-size: 0.85rem;
+    .shopping-list li {
       display: flex;
       align-items: baseline;
-      gap: 6px;
+      gap: 10px;
+      padding: 0.65rem 0;
+      border-bottom: 1px dashed #f7e4d4;
+      font-size: 0.9rem;
     }
-    .reminder-list li::before {
-      content: "🌸";
-      font-size: 0.7rem;
+    .shopping-list li:last-child {
+      border-bottom: none;
     }
-    .supplement-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin: 0.8rem 0;
-    }
-    .supp-item {
-      background: #fef5e8;
-      border-radius: 1rem;
-      padding: 0.4rem 0.8rem;
-      font-size: 0.85rem;
-      text-align: center;
-      flex: 1;
-      min-width: 80px;
-    }
-    hr {
-      margin: 0.8rem 0;
-      border: 0;
-      height: 1px;
-      background: linear-gradient(to right, #ffe1c6, transparent);
-    }
-    .badge-tip {
-      background: #fff0e0;
-      padding: 4px 10px;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #b45f2b;
-      text-align: center;
-      margin-top: 12px;
+    .rec-badge {
+      background: #ffe6d5;
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #c25d1a;
+      margin-left: 6px;
+      white-space: nowrap;
     }
     .footnote {
       text-align: center;
-      margin-top: 2rem;
-      font-size: 0.7rem;
+      margin-top: 1.8rem;
+      font-size: 0.65rem;
       color: #c78b56;
       border-top: 1px solid #fee2ce;
       padding-top: 1rem;
     }
-
-    @media (max-width: 1000px) {
-      .dashboard { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 700px) {
-      body { padding: 1rem; }
-      .dashboard { grid-template-columns: 1fr; }
-      .card-header h2 { font-size: 1.2rem; }
+    /* 小点缀 */
+    .baby-symbol {
+      font-size: 0.85rem;
+      display: inline-block;
+      background: #fff2e6;
+      padding: 2px 12px;
+      border-radius: 30px;
     }
   </style>
 </head>
 <body>
 <div class="handbook">
   <div class="hero">
-    <h1>🍼 月子时光 · 精简照护手册</h1>
-    <p>宝宝护理 + 妈妈康复 + 周月子餐 + 待买清单</p>
+    <h1>🍼 月子照护手册</h1>
+    <div class="baby-name">🐣 段翼陈 · 专属守护</div>
+    <p>宝宝护理 | 妈妈恢复 | 七日轮换餐 | 精简待买</p>
   </div>
 
   <div class="dashboard">
     
-    <!-- 卡片1：宝宝护理（核心） -->
+    <!-- 模块1：宝宝护理（含注意事项 + 宝宝名字场景化） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>👶</span> 宝宝每日护理</h2>
+        <h2><span>👶</span> 宝宝护理 · 段翼陈照护</h2>
       </div>
       <div class="card-content">
-        <ul class="task-list">
-          <li><span class="check-bullet">🍼</span> 喂奶 + 拍嗝（竖抱10-15分钟）</li>
-          <li><span class="check-bullet">🧷</span> 换尿布 · 观察便便 · 护臀膏</li>
-          <li><span class="check-bullet">🧴</span> 抚触按摩 / 身体乳（睡前）</li>
-          <li><span class="check-bullet">🛁</span> 洗澡（水温37-38℃，室温26-28℃）</li>
-          <li><span class="check-bullet">🌡️</span> 脐带护理（75%酒精） + 体温监测</li>
-          <li><span class="check-bullet">💤</span> 睡眠记录 + 黄昏闹安抚（白噪音）</li>
+        <ul class="checklist">
+          <li><span class="bullet-icon">🍼</span> 喂奶+拍嗝（竖抱10-15分钟，防胀气）</li>
+          <li><span class="bullet-icon">🧷</span> 换尿布 · 观察便便颜色 · 护臀膏防红臀</li>
+          <li><span class="bullet-icon">🧴</span> 抚触按摩/身体乳（增强安全感，睡前做）</li>
+          <li><span class="bullet-icon">🛁</span> 洗澡水温37-38℃，室温26-28℃，5分钟内</li>
+          <li><span class="bullet-icon">🌡️</span> 脐带护理：75%酒精棉签由内向外，保持干燥</li>
+          <li><span class="bullet-icon">💤</span> 睡眠+黄昏闹安抚（白噪音/襁褓，防惊跳）</li>
         </ul>
-        <div class="highlight-block" style="margin-top: 8px;">
-          <div style="font-weight: 500; font-size:0.85rem">💊 每日补充</div>
-          <div class="supplement-grid" style="margin-top: 4px;">
-            <div class="supp-item">💧 维D3 · 1滴/天</div>
-            <div class="supp-item">🧬 益生菌（防肠胀气）</div>
+        <div class="highlight-block">
+          <div class="highlight-title">⚠️ 翼陈特别注意事项</div>
+          <div class="inline-tips">
+            • 每日补充维生素D3 400IU（出生15天后）<br>
+            • 避免摇晃综合征，头部始终支撑<br>
+            • 体温＞37.5℃或拒奶及时就医<br>
+            • 记录每日奶量/便便，建立专属作息
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 卡片2：妈妈照护（合并产后恢复 + 产褥运动 + 情绪）精简有力 -->
+    <!-- 模块2：妈妈护理（整合产后恢复 + 产褥运动 + 情绪） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>🤱</span> 妈妈照护 · 恢复指南</h2>
+        <h2><span>🤱</span> 妈妈护理 · 产褥恢复</h2>
       </div>
       <div class="card-content">
-        <ul class="reminder-list">
-          <li>勤换卫生巾，观察恶露；伤口保持干燥（遵医嘱消毒）</li>
-          <li>凯格尔运动（每天2组）+ 腹式呼吸（顺产第3天起）</li>
-          <li>避免提重物、久站；束腹带饭后半小时取下</li>
-          <li>哺乳后涂羊脂膏预防皲裂；按需排空乳房</li>
-          <li>跟随宝宝作息补觉，爸爸分担夜奶（瓶喂）</li>
+        <ul class="checklist">
+          <li><span class="bullet-icon">💧</span> 勤换卫生巾观察恶露，伤口保持干燥（遵医嘱消毒）</li>
+          <li><span class="bullet-icon">🧘</span> 凯格尔运动（每天2组）+ 腹式呼吸（顺产第3天起）</li>
+          <li><span class="bullet-icon">🍗</span> 避免提重物/久站，束腹带饭后半小时取下</li>
+          <li><span class="bullet-icon">🤱</span> 哺乳后涂抹羊脂膏防皲裂，按需排空乳房</li>
+          <li><span class="bullet-icon">😴</span> 跟随宝宝作息补觉，爸爸分担夜奶（瓶喂）</li>
         </ul>
         <div class="highlight-block">
-          <div style="font-weight: 500; font-size:0.85rem">🧘 温和产褥操（每日）</div>
-          <div style="font-size:0.8rem; margin-top: 5px;">✔ 脚踝滑动 · 抬臀运动 · 靠墙站立5分钟</div>
-          <div style="font-size:0.75rem; color:#b37b4b; margin-top: 5px;">💬 情绪小记：每天记录一件开心事，减少焦虑</div>
+          <div class="highlight-title">🌸 温和产褥运动 & 情绪支持</div>
+          <div class="inline-tips">
+            • 每日脚踝滑动、抬臀运动，避免久坐<br>
+            • 产后42天复查盆底肌+腹直肌<br>
+            • 每天记录一件小确幸，家人多鼓励，减少焦虑
+          </div>
         </div>
-        <div class="badge-tip">📅 产后42天复查：盆底肌评估 + 血常规</div>
+        <div style="margin-top: 8px; background:#fff5ec; padding:6px 12px; border-radius: 40px; text-align:center; font-size:0.75rem;">
+          💊 哺乳期持续补充复合维生素+钙片
+        </div>
       </div>
     </div>
 
-    <!-- 卡片3：一周月子餐（带上下翻页，七日不重样） -->
+    <!-- 模块3：一周不重样月子餐（带上下翻页，手机友好） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>🍲</span> 七日月子餐</h2>
+        <h2><span>🍲</span> 七日月子餐 · 轮换</h2>
         <div class="week-nav">
-          <button id="prevDayBtn">◀</button>
+          <button id="prevDayBtn" aria-label="前一天">◀</button>
           <span id="dayLabel" class="day-indicator">第1天 · 周一</span>
-          <button id="nextDayBtn">▶</button>
+          <button id="nextDayBtn" aria-label="后一天">▶</button>
         </div>
       </div>
       <div class="card-content" id="weeklyMealContainer">
-        <div class="meal-grid" id="dynamicMealGrid">加载中...</div>
+        <div class="meal-grid" id="dynamicMealGrid">加载菜单...</div>
       </div>
-      <div class="badge-tip" style="margin: 0 1rem 1rem 1rem;">📆 上下箭头切换 · 一排二调三补四养</div>
+      <div style="margin: 0 1rem 1rem 1rem; font-size:0.65rem; text-align:center; background:#fff4e8; border-radius: 40px; padding:6px;">
+        📌 一排二调三补四养 | 点击箭头切换每日食谱
+      </div>
     </div>
 
-    <!-- 卡片4：待买物品清单（合并奶瓶奶粉、收纳、衣架、书籍、衣服等，清晰分类） -->
+    <!-- 模块4：待买清单（最终推荐，奶瓶/奶粉/收纳/衣架/书籍/衣服等） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>🛒</span> 待买物品清单</h2>
+        <h2><span>🛒</span> 待买清单 · 最终推荐</h2>
       </div>
       <div class="card-content">
         <ul class="shopping-list">
-          <li><span class="check-bullet">🍼</span> <strong>奶瓶</strong> — 推荐<strong>PPSU材质</strong>（轻便耐热/不含BPA），如<strong>hegen或贝亲</strong>宽口径<span class="tag">✔ 防胀气</span></li>
-          <li><span class="check-bullet">🥛</span> <strong>奶粉</strong> — 皇家美素佳儿<span class="tag">口碑好</span>（含乳铁蛋白，适合初生）</li>
-          <li><span class="check-bullet">📦</span> <strong>衣柜收纳盒</strong> — 可叠加牛津布/透明抽屉式，区分宝宝衣物</li>
-          <li><span class="check-bullet">👕</span> <strong>宝宝衣架</strong> — 伸缩防滑晾衣架（肩宽可调节）</li>
-          <li><span class="check-bullet">📚</span> <strong>护理参考书</strong> — 《美国儿科学会育儿百科》+ 《崔玉涛育儿百科》</li>
-          <li><span class="check-bullet">👗</span> <strong>宝宝衣服</strong> — 连体衣(哈衣)52-59码、纯棉包屁衣、胎帽、袜子</li>
+          <li><span class="bullet-icon">🍼</span> <strong>奶瓶</strong> — PPSU材质（轻便耐热/不含BPA）<span class="rec-badge">hegen / 贝亲宽口径</span></li>
+          <li><span class="bullet-icon">🥛</span> <strong>奶粉</strong> — 皇家美素佳儿（含乳铁蛋白，适合初生）<span class="rec-badge">口碑优选</span></li>
+          <li><span class="bullet-icon">📦</span> <strong>衣柜收纳盒</strong> — 牛津布或透明抽屉式，区分宝宝衣物</li>
+          <li><span class="bullet-icon">👕</span> <strong>宝宝衣架</strong> — 伸缩防滑晾衣架（可调节肩宽）</li>
+          <li><span class="bullet-icon">📚</span> <strong>护理参考书</strong> — 《美国儿科学会育儿百科》+《崔玉涛育儿百科》</li>
+          <li><span class="bullet-icon">👗</span> <strong>宝宝衣服</strong> — 连体衣52-59码、纯棉包屁衣、胎帽、防抓手套、袜子</li>
         </ul>
-        <div class="highlight-block" style="margin-top: 6px;">
-          <div style="font-size:0.8rem;">✨ 补充提醒：备奶瓶刷、安抚奶嘴、婴儿指甲剪、隔尿垫</div>
+        <div class="highlight-block" style="margin-top: 0.6rem;">
+          <div class="highlight-title">🔧 附加必备小物</div>
+          <div class="inline-tips">
+            奶瓶刷、安抚奶嘴、婴儿指甲剪、隔尿垫、护臀膏、水温计
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- 卡片5：营养补充+用药小贴士 (合并原有维生素与用药提醒) -->
-    <div class="card">
-      <div class="card-header">
-        <h2><span>💊</span> 营养补给 & 用药贴士</h2>
-      </div>
-      <div class="card-content">
-        <ul class="task-list">
-          <li><span class="check-bullet">🌸</span> 妈妈复合维生素 + 钙片（哺乳期持续）</li>
-          <li><span class="check-bullet">💧</span> 宝宝维生素D3（出生15天后，每日1滴）</li>
-          <li><span class="check-bullet">🩸</span> 妈妈铁剂（遵医嘱，搭配维C）</li>
-        </ul>
-        <div class="highlight-block">
-          <div style="font-weight:500; font-size:0.85rem">⏰ 用药备忘录</div>
-          <div style="font-size:0.8rem; margin-top: 4px;">✔ 益母草颗粒/生化汤（遵医嘱排恶露）<br>✔ 乳头皲裂：羊脂膏，喂奶后涂抹<br>✔ 便秘时咨询医生使用乳果糖</div>
-        </div>
-        <hr>
-        <div style="font-size:0.75rem; color:#aa6f42; text-align:center;">🍼 哺乳前洗手 · 按需喂养 · 每天保证液体摄入</div>
-      </div>
-    </div>
-
-    <!-- 卡片6：每日速查清单（合并早晨/午后/晚间要点，妈妈+宝宝同步） -->
-    <div class="card">
-      <div class="card-header">
-        <h2><span>📝</span> 每日速查 · 同步清单</h2>
-      </div>
-      <div class="card-content">
-        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-          <div><span style="background:#ffede2; padding:3px 12px; border-radius: 30px;">✅ 早晨</span> 测宝宝体温 + 妈妈伤口观察</div>
-          <div><span style="background:#ffede2; padding:3px 12px; border-radius: 30px;">✅ 午后</span> 宝宝洗澡 + 妈妈盆底肌训练</div>
-          <div><span style="background:#ffede2; padding:3px 12px; border-radius: 30px;">✅ 晚间</span> 抚触按摩 + 妈妈泡脚（恶露减少后）</div>
-          <div><span style="background:#ffede2; padding:3px 12px; border-radius: 30px;">✅ 睡眠</span> 宝宝睡，妈妈同步补觉</div>
-        </div>
-        <div class="badge-tip" style="margin-top: 14px;">🍃 月子核心：休息、营养、心情、适度活动</div>
       </div>
     </div>
   </div>
 
   <div class="footnote">
-    🌟 可根据每日完成情况打勾（电子/打印）｜ 七日菜单每周轮换，点击左右箭头切换 ｜ 宝宝和妈妈如有不适请及时就医
+    🌟 段翼陈家庭专属手册 | 七日餐单每日可翻页 | 如有不适请及时就医，以医嘱为准
   </div>
 </div>
 
 <script>
-  // ---------- 一周月子餐数据 (七日不重样，结构完整) ----------
+  // ======================= 一周月子餐数据（七日不重样，精细到每日） =======================
   const weeklyMenu = [
     { dayName: "第1天 · 周一", meals: {
       breakfast: ["红枣小米粥", "全麦馒头", "麻油猪肝", "煮鸡蛋", "清炒时蔬"],
@@ -455,18 +448,18 @@
   const dayLabelSpan = document.getElementById('dayLabel');
   const mealContainer = document.getElementById('dynamicMealGrid');
 
-  function renderCurrentDayMenu() {
+  function renderCurrentDay() {
     const menu = weeklyMenu[currentDayIndex];
     if (!menu) return;
     dayLabelSpan.innerText = menu.dayName;
     const m = menu.meals;
     const html = `
       <div class="meal-grid">
-        <div class="meal-time"><strong>🌅 早餐</strong><div class="meal-items">${m.breakfast.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>☀️ 午餐</strong><div class="meal-items">${m.lunch.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🍎 加餐</strong><div class="meal-items">${m.snack.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🌙 晚餐</strong><div class="meal-items">${m.dinner.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🌜 夜宵</strong><div class="meal-items">${m.nightSnack.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🌅 早餐 7:30</strong><div class="meal-items">${m.breakfast.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>☀️ 午餐 12:00</strong><div class="meal-items">${m.lunch.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🍎 加餐 15:30</strong><div class="meal-items">${m.snack.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🌙 晚餐 18:00</strong><div class="meal-items">${m.dinner.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🌜 夜宵 21:00</strong><div class="meal-items">${m.nightSnack.map(i=>`<span>${i}</span>`).join('')}</div></div>
       </div>
     `;
     mealContainer.innerHTML = html;
@@ -474,13 +467,13 @@
 
   document.getElementById('prevDayBtn').addEventListener('click', () => {
     currentDayIndex = (currentDayIndex - 1 + weeklyMenu.length) % weeklyMenu.length;
-    renderCurrentDayMenu();
+    renderCurrentDay();
   });
   document.getElementById('nextDayBtn').addEventListener('click', () => {
     currentDayIndex = (currentDayIndex + 1) % weeklyMenu.length;
-    renderCurrentDayMenu();
+    renderCurrentDay();
   });
-  renderCurrentDayMenu();
+  renderCurrentDay();
 </script>
 </body>
 </html>
