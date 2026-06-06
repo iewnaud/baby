@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>段翼陈宝宝 · 月子照护手册</title>
-  <link rel="icon" type="image/png" href="baby_icon.png">
+  <link rel="icon" href="baby_icon.png?v=2">
   <style>
     * {
       margin: 0;
@@ -19,13 +19,11 @@
       padding: 1.2rem 1rem 2rem;
     }
 
-    /* 手机优先容器 */
     .handbook {
       max-width: 560px;
       margin: 0 auto;
     }
 
-    /* 头部欢迎区 */
     .hero {
       text-align: center;
       margin-bottom: 1.5rem;
@@ -41,7 +39,6 @@
       -webkit-background-clip: text;
       color: transparent;
       margin-bottom: 0.3rem;
-      letter-spacing: -0.3px;
     }
     .baby-name {
       font-size: 1.2rem;
@@ -62,24 +59,18 @@
       padding-top: 0.5rem;
     }
 
-    /* 四大模块卡片列表 */
     .dashboard {
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
     }
 
-    /* 卡片样式 */
     .card {
       background: white;
       border-radius: 1.8rem;
       box-shadow: 0 6px 16px rgba(100, 50, 20, 0.06);
       overflow: hidden;
       border: 1px solid #ffe3cf;
-      transition: transform 0.1s;
-    }
-    .card:active {
-      transform: scale(0.99);
     }
 
     .card-header {
@@ -133,16 +124,6 @@
       flex-shrink: 0;
       margin-top: 1px;
     }
-    .tag-sm {
-      background: #fff0e0;
-      padding: 2px 8px;
-      border-radius: 30px;
-      font-size: 0.65rem;
-      font-weight: 500;
-      color: #b45f2b;
-      margin-left: 6px;
-      white-space: nowrap;
-    }
     .highlight-block {
       background: #fefaf5;
       border-radius: 1.2rem;
@@ -163,8 +144,25 @@
       color: #5e3e26;
       line-height: 1.45;
     }
+    .inline-tips strong {
+      color: #c25d1a;
+    }
+    .sub-section {
+      margin-top: 0.8rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #f0dbc8;
+    }
+    .sub-section-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #b87a48;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-    /* 月子餐专属 */
+    /* 月子餐 */
     .week-nav {
       display: flex;
       align-items: center;
@@ -184,7 +182,6 @@
       cursor: pointer;
       color: #a65322;
       font-weight: bold;
-      transition: 0.1s;
     }
     .week-nav button:active {
       background: #e2cfbc;
@@ -257,6 +254,24 @@
       margin-left: 6px;
       white-space: nowrap;
     }
+    .big-label {
+      background: #e8d9cc;
+      border-radius: 16px;
+      padding: 2px 8px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #8b5a34;
+      margin-right: 6px;
+    }
+    .section-sub {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #b87a48;
+      margin: 0.5rem 0 0.2rem 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .footnote {
       text-align: center;
       margin-top: 1.8rem;
@@ -272,32 +287,68 @@
   <div class="hero">
     <h1>🍼 月子照护手册</h1>
     <div class="baby-name">🐣 段翼陈 · 专属守护</div>
-    <p>宝宝护理 | 妈妈恢复 | 七日轮换餐 | 精简待买</p>
+    <p>宝宝护理 | 妈妈恢复 | 两周轮换餐 | 待买清单</p>
   </div>
 
   <div class="dashboard">
     
-    <!-- 模块1：宝宝护理 -->
+    <!-- 模块1：宝宝护理（扩展版：喂养/洗澡/屁屁/肠胀气/抱姿） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>👶</span> 宝宝护理 · 照护</h2>
+        <h2><span>👶</span> 宝宝护理 · 超详细指南</h2>
       </div>
       <div class="card-content">
-        <ul class="checklist">
-          <li><span class="bullet-icon">🍼</span> 喂奶+拍嗝（竖抱10-15分钟，防胀气）</li>
-          <li><span class="bullet-icon">🧷</span> 换尿布 · 观察便便颜色 · 护臀膏防红臀</li>
-          <li><span class="bullet-icon">🧴</span> 抚触按摩/身体乳（增强安全感，睡前做）</li>
-          <li><span class="bullet-icon">🛁</span> 洗澡水温37-38℃，室温26-28℃，5分钟内</li>
-          <li><span class="bullet-icon">🌡️</span> 脐带护理：75%酒精棉签由内向外，保持干燥</li>
-          <li><span class="bullet-icon">💤</span> 睡眠+黄昏闹安抚（白噪音/襁褓，防惊跳）</li>
-        </ul>
-        <div class="highlight-block">
-          <div class="highlight-title">⚠️ 特别注意事项</div>
+        <!-- 喂养专区 -->
+        <div class="sub-section">
+          <div class="sub-section-title">🍼 喂养（母乳/奶粉）</div>
           <div class="inline-tips">
-            • 每日补充维生素D3 400IU（出生15天后）<br>
-            • 避免摇晃综合征，头部始终支撑<br>
-            • 体温＞37.5℃或拒奶及时就医<br>
-            • 记录每日奶量/便便，建立专属作息
+            <strong>· 奶粉冲泡：</strong>水温<strong>70℃</strong>先加水后加粉，摇匀后冷却至40-45℃喂哺；<br>
+            <strong>· 奶量参考（按需）：</strong>1-2周：60-90ml/次，8-12次/天；2-4周：90-120ml/次，7-9次/天；满月约120-150ml/次。<br>
+            <strong>· 母乳喂养：</strong>每侧10-15分钟，每天8-12次，观察尿量（6次以上/天）判断是否吃饱。<br>
+            <strong>· 拍嗝：</strong>喂后竖抱，头靠肩，空心掌从下往上轻拍背部，直到打出嗝（约5-10分钟）。
+          </div>
+        </div>
+        <!-- 洗澡专区 -->
+        <div class="sub-section">
+          <div class="sub-section-title">🛁 洗澡流程 & 顺序</div>
+          <div class="inline-tips">
+            <strong>水温：</strong>37-38℃（手腕内侧试温），室温26-28℃。<br>
+            <strong>顺序：</strong>先洗脸（无泪配方）→ 洗头（抱橄榄球式）→ 洗前胸→ 后背→ 四肢→ 褶皱处（脖子/腋下/腹股沟）。<br>
+            <strong>时长：</strong>＜5分钟，洗后立即用大浴巾蘸干，涂抚触油/身体乳。
+          </div>
+        </div>
+        <!-- 屁屁护理 + 换纸尿裤 -->
+        <div class="sub-section">
+          <div class="sub-section-title">🧷 屁屁护理 & 换纸尿裤</div>
+          <div class="inline-tips">
+            <strong>换尿裤流程：</strong>打开脏尿裤 → 湿棉柔巾从前向后擦净 → 用干巾吸干 → 涂护臀膏（氧化锌）→ 穿新尿裤（留两指空隙）。<br>
+            <strong>防红臀：</strong>每次便后流动温水冲洗，晾干后再穿；每天让屁屁透气15分钟。
+          </div>
+        </div>
+        <!-- 肠胀气 + 排气方法 -->
+        <div class="sub-section">
+          <div class="sub-section-title">😖 肠胀气 & 排气操</div>
+          <div class="inline-tips">
+            <strong>表现：</strong>无故哭闹、蹬腿、脸憋红、肚子鼓硬。<br>
+            <strong>排气方法：</strong>① 飞机抱（手掌托腹，头靠肘弯）5-10分钟；② 顺时针揉腹（避开肚脐）每次5分钟；③ 双腿蹬自行车动作；④ 喂奶后拍嗝更彻底；⑤ 益生菌辅助。
+          </div>
+        </div>
+        <!-- 抱宝宝的正确姿势 -->
+        <div class="sub-section">
+          <div class="sub-section-title">🤱 怎么抱宝宝</div>
+          <div class="inline-tips">
+            <strong>摇篮抱：</strong>头颈枕在臂弯，另一只手托屁股。<br>
+            <strong>竖抱拍嗝：</strong>让宝宝脸朝后趴在肩上，一手托头颈一手托臀。<br>
+            <strong>飞机抱：</strong>前臂穿过宝宝双腿，手掌托住腹部，头靠肘弯外侧。<br>
+            <strong>禁忌：</strong>不可竖抱过久（脊椎发育），严禁摇晃！
+          </div>
+        </div>
+        <div class="highlight-block">
+          <div class="highlight-title">📌 每日备忘</div>
+          <div class="inline-tips">
+            • 维D3：每天400IU（出生15天后）<br>
+            • 观察便便：金黄糊状/母乳，淡黄成形/奶粉<br>
+            • 体温＞37.5℃或精神差及时就医
           </div>
         </div>
       </div>
@@ -321,7 +372,7 @@
           <div class="inline-tips">
             • 每日脚踝滑动、抬臀运动，避免久坐<br>
             • 产后42天复查盆底肌+腹直肌<br>
-            • 每天记录一件小确幸，家人多鼓励，减少焦虑
+            • 每天记录一件小确幸，家人多鼓励
           </div>
         </div>
         <div style="margin-top: 8px; background:#fff5ec; padding:6px 12px; border-radius: 40px; text-align:center; font-size:0.75rem;">
@@ -330,105 +381,84 @@
       </div>
     </div>
 
-    <!-- 模块3：一周月子餐 -->
+    <!-- 模块3：两周不重样月子餐（14天） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>🍲</span> 七日月子餐 · 轮换</h2>
+        <h2><span>🍲</span> 十四日月子餐 · 轮换</h2>
         <div class="week-nav">
-          <button id="prevDayBtn" aria-label="前一天">◀</button>
-          <span id="dayLabel" class="day-indicator">第1天 · 周一</span>
-          <button id="nextDayBtn" aria-label="后一天">▶</button>
+          <button id="prevDayBtn">◀</button>
+          <span id="dayLabel" class="day-indicator">第1天</span>
+          <button id="nextDayBtn">▶</button>
         </div>
       </div>
       <div class="card-content" id="weeklyMealContainer">
         <div class="meal-grid" id="dynamicMealGrid">加载菜单...</div>
       </div>
       <div style="margin: 0 1rem 1rem 1rem; font-size:0.65rem; text-align:center; background:#fff4e8; border-radius: 40px; padding:6px;">
-        📌 一排二调三补四养 | 点击箭头切换每日食谱
+        📌 一排二调三补四养 | 点击箭头切换，共14天不重复
       </div>
     </div>
 
-    <!-- 模块4：待买清单（已添加奶瓶容量，移除奶粉标签） -->
+    <!-- 模块4：待买清单（型号细化） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>🛒</span> 待买清单 · 最终推荐</h2>
+        <h2><span>🛒</span> 待买清单 · 型号推荐</h2>
       </div>
       <div class="card-content">
+        <div class="section-sub">📦 大件·核心用品</div>
         <ul class="shopping-list">
-          <li><span class="bullet-icon">🍼</span> <strong>奶瓶</strong> — PPSU材质，宽口径，<strong>160ml + 240ml</strong> 各准备1-2个<span class="rec-badge">hegen / 贝亲</span></li>
-          <li><span class="bullet-icon">🥛</span> <strong>奶粉</strong> — 皇家美素佳儿（含乳铁蛋白，适合初生）</li>
-          <li><span class="bullet-icon">📦</span> <strong>衣柜收纳盒</strong> — 牛津布或透明抽屉式，区分宝宝衣物</li>
-          <li><span class="bullet-icon">👕</span> <strong>宝宝衣架</strong> — 伸缩防滑晾衣架（可调节肩宽）</li>
-          <li><span class="bullet-icon">📚</span> <strong>护理参考书</strong> — 《金牌月嫂教你坐月子》+《新生儿婴儿护理百科全书》</li>
-          <li><span class="bullet-icon">👗</span> <strong>宝宝衣服</strong> — 连体衣52-59码、纯棉包屁衣、胎帽、防抓手套、袜子</li>
+          <li><span class="bullet-icon">🛏️</span> <strong>婴儿床中床</strong> — 仿生包裹型，75-85cm，可移动<span class="rec-badge">防惊跳</span></li>
+          <li><span class="bullet-icon">🍼</span> <strong>奶瓶</strong> — PPSU宽口径，160ml+240ml<span class="rec-badge">hegen/贝亲</span></li>
+          <li><span class="bullet-icon">🧺</span> <strong>收纳盒</strong> — 透明抽屉式30*40*20cm，多层分区</li>
         </ul>
-        <div class="highlight-block" style="margin-top: 0.6rem;">
-          <div class="highlight-title">🔧 附加必备小物</div>
-          <div class="inline-tips">
-            奶瓶刷、安抚奶嘴、婴儿指甲剪、隔尿垫、护臀膏、水温计
-          </div>
-        </div>
+        <div class="section-sub">👩 妈妈专用护理</div>
+        <ul class="shopping-list">
+          <li><span class="bullet-icon">🩲</span> <strong>安睡裤</strong> — 产妇裤型，XL/XXL高腰<span class="rec-badge">子初/开丽，约30条</span></li>
+          <li><span class="bullet-icon">🛏️</span> <strong>产褥垫</strong> — 60*90cm加大，一次性隔水<span class="rec-badge">子初/十月结晶，15-20片</span></li>
+          <li><span class="bullet-icon">🥛</span> <strong>奶粉</strong> — 皇家美素佳儿（初生段）</li>
+          <li><span class="bullet-icon">👕</span> <strong>宝宝衣架</strong> — 伸缩防滑，可调肩宽</li>
+          <li><span class="bullet-icon">📚</span> <strong>护理书</strong> — 《金牌月嫂教你坐月子》+《新生儿护理百科》</li>
+        </ul>
+        <div class="section-sub">👗 宝宝衣物</div>
+        <ul class="shopping-list">
+          <li><span class="bullet-icon">👘</span> <strong>连体衣</strong> — 52-59码纯棉A类，4-6件<span class="rec-badge">前开扣</span></li>
+          <li><span class="bullet-icon">🧢</span> <strong>胎帽/手套/袜</strong> — 无骨缝，纯棉柔软</li>
+        </ul>
+        <div class="section-sub">🔧 小物·型号建议</div>
+        <ul class="shopping-list">
+          <li><span class="bullet-icon">🧴</span> 护臀膏（氧化锌/维蕾德）</li>
+          <li><span class="bullet-icon">🍼</span> 奶瓶刷（海绵+尼龙二合一）</li>
+          <li><span class="bullet-icon">😴</span> 安抚奶嘴（0-2月，硅胶）</li>
+          <li><span class="bullet-icon">✂️</span> 婴儿指甲剪（圆头/贝亲）</li>
+          <li><span class="bullet-icon">📏</span> 隔尿垫（可水洗50*70cm + 一次性）</li>
+          <li><span class="bullet-icon">🌡️</span> 水温计+温湿度计</li>
+        </ul>
       </div>
     </div>
   </div>
-
   <div class="footnote">
-    🌟 段翼陈家庭专属手册 · 奶瓶容量建议：160ml适合新生儿，240ml满月后使用
+    🌟 段翼陈家庭专属手册 · 两周餐单每日可翻页 | 护理细节参照最新循证指南
   </div>
 </div>
 
 <script>
-  // 一周月子餐数据（七日不重样）
+  // ======================= 两周月子餐数据（14天，每日不重样） =======================
   const weeklyMenu = [
-    { dayName: "第1天 · 周一", meals: {
-      breakfast: ["红枣小米粥", "全麦馒头", "麻油猪肝", "煮鸡蛋", "清炒时蔬"],
-      lunch: ["五谷饭", "麻油鸡", "鲫鱼豆腐汤", "清炒西兰花", "红豆汤"],
-      snack: ["木瓜炖奶", "橙子", "黑芝麻糊"],
-      dinner: ["紫米粥", "香菇乌鸡汤", "清蒸鲈鱼", "上汤娃娃菜", "药膳排骨"],
-      nightSnack: ["热牛奶", "酒酿圆子"]
-    }},
-    { dayName: "第2天 · 周二", meals: {
-      breakfast: ["山药瘦肉粥", "红薯饼", "菠菜炒鸡蛋", "腰果", "清炒茼蒿"],
-      lunch: ["糙米饭", "黄豆炖猪蹄", "虫草花鸡汤", "蒜蓉空心菜", "桂圆红枣汤"],
-      snack: ["银耳莲子羹", "香蕉", "全麦苏打饼干"],
-      dinner: ["红豆薏米饭", "当归生姜羊肉汤", "彩椒炒牛肉", "清炒芥蓝", "枸杞蒸蛋"],
-      nightSnack: ["温豆浆", "百合炖雪梨"]
-    }},
-    { dayName: "第3天 · 周三", meals: {
-      breakfast: ["南瓜小米粥", "紫薯包", "木耳炒蛋", "蒸玉米段", "麻油菠菜"],
-      lunch: ["燕麦米饭", "鲈鱼豆腐汤", "茶树菇炖鸡", "西芹百合", "花生炖猪尾"],
-      snack: ["牛奶炖蛋", "红心火龙果", "核桃仁"],
-      dinner: ["黑米粥", "黄芪炖乳鸽", "芦笋炒虾仁", "上汤苋菜", "桂圆糯米粥"],
-      nightSnack: ["黑芝麻糊", "红枣桂圆饮"]
-    }},
-    { dayName: "第4天 · 周四", meals: {
-      breakfast: ["花生红枣粥", "全麦吐司", "丝瓜炒蛋", "蒸南瓜", "清炒油菜"],
-      lunch: ["红豆饭", "番茄炖牛腩", "冬瓜排骨汤", "蚝油生菜", "红豆芋头汤"],
-      snack: ["酒酿小圆子", "蓝莓", "燕麦饼"],
-      dinner: ["山药枸杞粥", "黄花菜猪心汤", "彩椒鸡丁", "清炒荷兰豆", "红糖糍粑"],
-      nightSnack: ["温牛奶", "莲子百合羹"]
-    }},
-    { dayName: "第5天 · 周五", meals: {
-      breakfast: ["核桃黑米粥", "玉米窝头", "苋菜鸡蛋饼", "水煮蛋", "清炒豇豆"],
-      lunch: ["荞麦饭", "葱姜焖鸭", "黄花鱼汤", "地瓜叶", "莲子猪肚汤"],
-      snack: ["椰奶西米露", "猕猴桃", "杏仁"],
-      dinner: ["小米红薯粥", "四物鸡汤", "腐竹烧香菇", "清炒菜心", "芝麻汤圆"],
-      nightSnack: ["酒酿蛋花", "桂圆紫米粥"]
-    }},
-    { dayName: "第6天 · 周六", meals: {
-      breakfast: ["桂圆红枣粥", "红豆包", "蒸蛋羹", "清炒佛手瓜", "肉末蒸豆腐"],
-      lunch: ["芝麻饭", "咖喱土豆鸡", "黄豆猪骨汤", "蒜蓉西蓝花", "银耳红枣汤"],
-      snack: ["木瓜撞奶", "无花果", "芝士饼干"],
-      dinner: ["南瓜饭", "天麻炖鱼头", "糖醋藕片", "荷塘小炒", "酒酿南瓜圆子"],
-      nightSnack: ["热豆奶", "小米桂圆粥"]
-    }},
-    { dayName: "第7天 · 周日", meals: {
-      breakfast: ["紫薯燕麦粥", "芝麻卷", "三色蒸蛋", "清炒莴笋", "腰果西芹"],
-      lunch: ["十谷米饭", "香煎三文鱼", "竹荪鸡汤", "白灼秋葵", "红豆沙"],
-      snack: ["杏仁豆腐", "樱桃", "燕麦能量球"],
-      dinner: ["百合莲子粥", "杜仲炖腰花", "清蒸海鲈鱼", "上汤豆苗", "红糖发糕"],
-      nightSnack: ["温羊奶", "桂圆炖蛋"]
-    }}
+    { dayName: "第1天 · 周一", meals: { breakfast: ["红枣小米粥", "全麦馒头", "麻油猪肝", "煮鸡蛋", "清炒时蔬"], lunch: ["五谷饭", "麻油鸡", "鲫鱼豆腐汤", "清炒西兰花", "红豆汤"], snack: ["木瓜炖奶", "橙子", "黑芝麻糊"], dinner: ["紫米粥", "香菇乌鸡汤", "清蒸鲈鱼", "上汤娃娃菜", "药膳排骨"], nightSnack: ["热牛奶", "酒酿圆子"] } },
+    { dayName: "第2天 · 周二", meals: { breakfast: ["山药瘦肉粥", "红薯饼", "菠菜炒鸡蛋", "腰果", "清炒茼蒿"], lunch: ["糙米饭", "黄豆炖猪蹄", "虫草花鸡汤", "蒜蓉空心菜", "桂圆红枣汤"], snack: ["银耳莲子羹", "香蕉", "全麦苏打饼干"], dinner: ["红豆薏米饭", "当归生姜羊肉汤", "彩椒炒牛肉", "清炒芥蓝", "枸杞蒸蛋"], nightSnack: ["温豆浆", "百合炖雪梨"] } },
+    { dayName: "第3天 · 周三", meals: { breakfast: ["南瓜小米粥", "紫薯包", "木耳炒蛋", "蒸玉米段", "麻油菠菜"], lunch: ["燕麦米饭", "鲈鱼豆腐汤", "茶树菇炖鸡", "西芹百合", "花生炖猪尾"], snack: ["牛奶炖蛋", "红心火龙果", "核桃仁"], dinner: ["黑米粥", "黄芪炖乳鸽", "芦笋炒虾仁", "上汤苋菜", "桂圆糯米粥"], nightSnack: ["黑芝麻糊", "红枣桂圆饮"] } },
+    { dayName: "第4天 · 周四", meals: { breakfast: ["花生红枣粥", "全麦吐司", "丝瓜炒蛋", "蒸南瓜", "清炒油菜"], lunch: ["红豆饭", "番茄炖牛腩", "冬瓜排骨汤", "蚝油生菜", "红豆芋头汤"], snack: ["酒酿小圆子", "蓝莓", "燕麦饼"], dinner: ["山药枸杞粥", "黄花菜猪心汤", "彩椒鸡丁", "清炒荷兰豆", "红糖糍粑"], nightSnack: ["温牛奶", "莲子百合羹"] } },
+    { dayName: "第5天 · 周五", meals: { breakfast: ["核桃黑米粥", "玉米窝头", "苋菜鸡蛋饼", "水煮蛋", "清炒豇豆"], lunch: ["荞麦饭", "葱姜焖鸭", "黄花鱼汤", "地瓜叶", "莲子猪肚汤"], snack: ["椰奶西米露", "猕猴桃", "杏仁"], dinner: ["小米红薯粥", "四物鸡汤", "腐竹烧香菇", "清炒菜心", "芝麻汤圆"], nightSnack: ["酒酿蛋花", "桂圆紫米粥"] } },
+    { dayName: "第6天 · 周六", meals: { breakfast: ["桂圆红枣粥", "红豆包", "蒸蛋羹", "清炒佛手瓜", "肉末蒸豆腐"], lunch: ["芝麻饭", "咖喱土豆鸡", "黄豆猪骨汤", "蒜蓉西蓝花", "银耳红枣汤"], snack: ["木瓜撞奶", "无花果", "芝士饼干"], dinner: ["南瓜饭", "天麻炖鱼头", "糖醋藕片", "荷塘小炒", "酒酿南瓜圆子"], nightSnack: ["热豆奶", "小米桂圆粥"] } },
+    { dayName: "第7天 · 周日", meals: { breakfast: ["紫薯燕麦粥", "芝麻卷", "三色蒸蛋", "清炒莴笋", "腰果西芹"], lunch: ["十谷米饭", "香煎三文鱼", "竹荪鸡汤", "白灼秋葵", "红豆沙"], snack: ["杏仁豆腐", "樱桃", "燕麦能量球"], dinner: ["百合莲子粥", "杜仲炖腰花", "清蒸海鲈鱼", "上汤豆苗", "红糖发糕"], nightSnack: ["温羊奶", "桂圆炖蛋"] } },
+    // 第二周（第8-14天）
+    { dayName: "第8天 · 周一", meals: { breakfast: ["牛奶燕麦粥", "南瓜馒头", "西红柿炒蛋", "清炒芥蓝"], lunch: ["红薯饭", "彩椒炒牛肉", "黄芪炖鸡汤", "蒜蓉西蓝花"], snack: ["红枣银耳羹", "苹果"], dinner: ["紫米饭", "姜丝炒腰花", "木耳山药", "鲫鱼通草汤"], nightSnack: ["热牛奶", "全麦饼干"] } },
+    { dayName: "第9天 · 周二", meals: { breakfast: ["黑米红枣粥", "鸡蛋饼", "麻油菠菜"], lunch: ["糙米饭", "清蒸鲈鱼", "莲藕排骨汤", "蒜蓉空心菜"], snack: ["木瓜牛奶", "核桃"], dinner: ["红豆饭", "山药炖鸡", "清炒莴笋", "猪蹄花生汤"], nightSnack: ["酒酿蛋花"] } },
+    { dayName: "第10天 · 周三", meals: { breakfast: ["小米南瓜粥", "紫薯包", "白煮蛋"], lunch: ["薏米饭", "番茄炖牛腩", "鲫鱼汤", "清炒菜心"], snack: ["银耳雪梨羹", "香蕉"], dinner: ["黑米饭", "麻油鸡腿", "蒜蓉娃娃菜", "当归红枣汤"], nightSnack: ["温豆浆"] } },
+    { dayName: "第11天 · 周四", meals: { breakfast: ["山药排骨粥", "全麦吐司", "蒸蛋"], lunch: ["红豆薏米饭", "香菇炖鸡", "清炒西葫芦", "猪肝汤"], snack: ["酸奶", "火龙果"], dinner: ["南瓜饭", "黄豆焖猪蹄", "蒜蓉西兰花", "乌鸡汤"], nightSnack: ["黑芝麻糊"] } },
+    { dayName: "第12天 · 周五", meals: { breakfast: ["花生红豆粥", "杂粮馒头", "炒鸡蛋"], lunch: ["紫米饭", "茶树菇炖鸭", "清炒油麦菜", "豆腐鱼汤"], snack: ["牛奶炖蛋", "橙子"], dinner: ["地瓜饭", "莲子炖排骨", "清炒丝瓜", "鸡血藤鸡汤"], nightSnack: ["红枣桂圆茶"] } },
+    { dayName: "第13天 · 周六", meals: { breakfast: ["五谷豆浆", "菜包", "水煮蛋"], lunch: ["荞麦饭", "洋葱炒牛肉", "上汤菠菜", "花生猪蹄汤"], snack: ["百合莲子羹", "猕猴桃"], dinner: ["小米山药粥", "虫草花蒸鸡", "清炒苋菜", "黄花菜瘦肉汤"], nightSnack: ["温牛奶"] } },
+    { dayName: "第14天 · 周日", meals: { breakfast: ["枸杞小米粥", "蛋饼", "清炒藕片"], lunch: ["红豆饭", "蒜香排骨", "炒三丝", "鲈鱼豆腐汤"], snack: ["椰奶西米露", "车厘子"], dinner: ["紫米粥", "当归炖羊肉", "蒜蓉空心菜", "鱼头汤"], nightSnack: ["酒酿圆子"] } }
   ];
 
   let currentDayIndex = 0;
@@ -442,11 +472,11 @@
     const m = menu.meals;
     const html = `
       <div class="meal-grid">
-        <div class="meal-time"><strong>🌅 早餐 7:30</strong><div class="meal-items">${m.breakfast.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>☀️ 午餐 12:00</strong><div class="meal-items">${m.lunch.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🍎 加餐 15:30</strong><div class="meal-items">${m.snack.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🌙 晚餐 18:00</strong><div class="meal-items">${m.dinner.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🌜 夜宵 21:00</strong><div class="meal-items">${m.nightSnack.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🌅 早餐</strong><div class="meal-items">${m.breakfast.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>☀️ 午餐</strong><div class="meal-items">${m.lunch.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🍎 加餐</strong><div class="meal-items">${m.snack.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🌙 晚餐</strong><div class="meal-items">${m.dinner.map(i=>`<span>${i}</span>`).join('')}</div></div>
+        <div class="meal-time"><strong>🌜 夜宵</strong><div class="meal-items">${m.nightSnack.map(i=>`<span>${i}</span>`).join('')}</div></div>
       </div>
     `;
     mealContainer.innerHTML = html;
