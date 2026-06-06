@@ -173,9 +173,9 @@
     .week-nav button {
       background: #f0e2d4;
       border: none;
-      font-size: 1.1rem;
-      width: 34px;
-      height: 34px;
+      font-size: 1.2rem;
+      width: 36px;
+      height: 36px;
       border-radius: 40px;
       cursor: pointer;
       color: #a65322;
@@ -188,42 +188,42 @@
     .day-indicator {
       font-weight: 600;
       background: white;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 40px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: #bc6f3c;
     }
     .meal-grid {
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
+      gap: 0.8rem;
       margin-top: 0.8rem;
     }
     .meal-time {
       background: #fff9f3;
       border-radius: 1rem;
-      padding: 0.5rem 0.8rem;
+      padding: 0.55rem 0.9rem;
     }
     .meal-time strong {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #c25d1a;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       border-left: 3px solid #ffb26e;
       padding-left: 10px;
     }
     .meal-items {
       display: flex;
       flex-wrap: wrap;
-      gap: 5px 8px;
+      gap: 6px 10px;
       padding-left: 13px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: #4f3a28;
     }
     .meal-items span {
       background: white;
       border-radius: 30px;
-      padding: 2px 8px;
+      padding: 3px 10px;
       box-shadow: 0 1px 2px #ffe0cb;
     }
 
@@ -275,7 +275,7 @@
   <div class="hero">
     <h1>🍼 月子照护手册</h1>
     <div class="baby-name">🐣 段翼陈 · 专属守护</div>
-    <p>宝宝护理 | 妈妈恢复 | 四周轮换餐 | 待买清单</p>
+    <p>宝宝护理 | 妈妈恢复 | 两周轮换餐 | 待买清单</p>
   </div>
 
   <div class="dashboard">
@@ -364,25 +364,25 @@
       </div>
     </div>
 
-    <!-- 模块3：四周不重样月子餐（28天） -->
+    <!-- 模块3：两周不重样月子餐（14天） -->
     <div class="card">
       <div class="card-header">
-        <h2><span>🍲</span> 四周月子餐 · 轮换</h2>
+        <h2><span>🍲</span> 十四日月子餐 · 轮换</h2>
         <div class="week-nav">
           <button id="prevDayBtn">◀</button>
-          <span id="dayLabel" class="day-indicator">第1天</span>
+          <span id="dayLabel" class="day-indicator">第1天 · 周一</span>
           <button id="nextDayBtn">▶</button>
         </div>
       </div>
       <div class="card-content" id="weeklyMealContainer">
-        <div class="meal-grid" id="dynamicMealGrid">加载菜单...</div>
+        <div id="dynamicMealGrid" class="meal-grid">加载菜单中...</div>
       </div>
       <div style="margin: 0 1rem 1rem 1rem; font-size:0.65rem; text-align:center; background:#fff4e8; border-radius: 40px; padding:6px;">
-        📌 一排二调三补四养 | 点击箭头切换，共28天不重复
+        📌 一排二调三补四养 | 点击箭头切换，共14天不重复
       </div>
     </div>
 
-    <!-- 模块4：待买清单（无水温计/湿度计） -->
+    <!-- 模块4：待买清单 -->
     <div class="card">
       <div class="card-header">
         <h2><span>🛒</span> 待买清单 · 型号推荐</h2>
@@ -392,7 +392,7 @@
         <ul class="shopping-list">
           <li><span class="bullet-icon">🛏️</span> <strong>婴儿床中床</strong> — 仿生包裹型，75-85cm，可移动<span class="rec-badge">防惊跳</span></li>
           <li><span class="bullet-icon">🍼</span> <strong>奶瓶</strong> — PPSU宽口径，160ml+240ml<span class="rec-badge">hegen/贝亲</span></li>
-          <li><span class="bullet-icon">🧺</span> <strong>衣柜收纳盒</strong> — <strong>38×45×20.5cm透明抽屉式</strong>，每层并排放2个（总宽76cm），可叠放8层<span class="rec-badge">适配柜子86×56×172</span></li>
+          <li><span class="bullet-icon">🧺</span> <strong>衣柜收纳盒</strong> — <strong>38×45×20.5cm透明抽屉式</strong>，每层并排放2个，可叠8层<span class="rec-badge">适配柜子86×56×172</span></li>
         </ul>
         <div class="section-sub">👩 妈妈专用护理</div>
         <ul class="shopping-list">
@@ -414,65 +414,61 @@
           <li><span class="bullet-icon">😴</span> 安抚奶嘴（0-2月，硅胶）</li>
           <li><span class="bullet-icon">✂️</span> 婴儿指甲剪（圆头/贝亲）</li>
           <li><span class="bullet-icon">📏</span> 隔尿垫（可水洗50×70cm + 一次性）</li>
-          <li><span class="bullet-icon">🛁</span> 洗澡水温计（测水温用）</li>
         </ul>
       </div>
     </div>
   </div>
   <div class="footnote">
-    🌟 段翼陈家庭专属手册 · 收纳盒按柜子86×56×172定制：38×45×20.5cm，每层2个并排，可叠8层 | 四周餐单每日可翻页
+    🌟 段翼陈家庭专属手册 · 收纳盒按柜子86×56×172定制：38×45×20.5cm | 两周餐单每日可翻页
   </div>
 </div>
 
 <script>
-  // ======================= 四周月子餐数据（28天，每日不重样） =======================
+  // 两周月子餐数据（14天完整）
   const weeklyMenu = [
-    // 第一周
-    { dayName: "第1天 · 周一", meals: { breakfast: ["红枣小米粥", "全麦馒头", "麻油猪肝", "煮鸡蛋", "清炒时蔬"], lunch: ["五谷饭", "麻油鸡", "鲫鱼豆腐汤", "清炒西兰花", "红豆汤"], snack: ["木瓜炖奶", "橙子", "黑芝麻糊"], dinner: ["紫米粥", "香菇乌鸡汤", "清蒸鲈鱼", "上汤娃娃菜", "药膳排骨"], nightSnack: ["热牛奶", "酒酿圆子"] } },
-    { dayName: "第2天 · 周二", meals: { breakfast: ["山药瘦肉粥", "红薯饼", "菠菜炒鸡蛋", "腰果", "清炒茼蒿"], lunch: ["糙米饭", "黄豆炖猪蹄", "虫草花鸡汤", "蒜蓉空心菜", "桂圆红枣汤"], snack: ["银耳莲子羹", "香蕉", "全麦苏打饼干"], dinner: ["红豆薏米饭", "当归生姜羊肉汤", "彩椒炒牛肉", "清炒芥蓝", "枸杞蒸蛋"], nightSnack: ["温豆浆", "百合炖雪梨"] } },
-    { dayName: "第3天 · 周三", meals: { breakfast: ["南瓜小米粥", "紫薯包", "木耳炒蛋", "蒸玉米段", "麻油菠菜"], lunch: ["燕麦米饭", "鲈鱼豆腐汤", "茶树菇炖鸡", "西芹百合", "花生炖猪尾"], snack: ["牛奶炖蛋", "红心火龙果", "核桃仁"], dinner: ["黑米粥", "黄芪炖乳鸽", "芦笋炒虾仁", "上汤苋菜", "桂圆糯米粥"], nightSnack: ["黑芝麻糊", "红枣桂圆饮"] } },
-    { dayName: "第4天 · 周四", meals: { breakfast: ["花生红枣粥", "全麦吐司", "丝瓜炒蛋", "蒸南瓜", "清炒油菜"], lunch: ["红豆饭", "番茄炖牛腩", "冬瓜排骨汤", "蚝油生菜", "红豆芋头汤"], snack: ["酒酿小圆子", "蓝莓", "燕麦饼"], dinner: ["山药枸杞粥", "黄花菜猪心汤", "彩椒鸡丁", "清炒荷兰豆", "红糖糍粑"], nightSnack: ["温牛奶", "莲子百合羹"] } },
-    { dayName: "第5天 · 周五", meals: { breakfast: ["核桃黑米粥", "玉米窝头", "苋菜鸡蛋饼", "水煮蛋", "清炒豇豆"], lunch: ["荞麦饭", "葱姜焖鸭", "黄花鱼汤", "地瓜叶", "莲子猪肚汤"], snack: ["椰奶西米露", "猕猴桃", "杏仁"], dinner: ["小米红薯粥", "四物鸡汤", "腐竹烧香菇", "清炒菜心", "芝麻汤圆"], nightSnack: ["酒酿蛋花", "桂圆紫米粥"] } },
-    { dayName: "第6天 · 周六", meals: { breakfast: ["桂圆红枣粥", "红豆包", "蒸蛋羹", "清炒佛手瓜", "肉末蒸豆腐"], lunch: ["芝麻饭", "咖喱土豆鸡", "黄豆猪骨汤", "蒜蓉西蓝花", "银耳红枣汤"], snack: ["木瓜撞奶", "无花果", "芝士饼干"], dinner: ["南瓜饭", "天麻炖鱼头", "糖醋藕片", "荷塘小炒", "酒酿南瓜圆子"], nightSnack: ["热豆奶", "小米桂圆粥"] } },
-    { dayName: "第7天 · 周日", meals: { breakfast: ["紫薯燕麦粥", "芝麻卷", "三色蒸蛋", "清炒莴笋", "腰果西芹"], lunch: ["十谷米饭", "香煎三文鱼", "竹荪鸡汤", "白灼秋葵", "红豆沙"], snack: ["杏仁豆腐", "樱桃", "燕麦能量球"], dinner: ["百合莲子粥", "杜仲炖腰花", "清蒸海鲈鱼", "上汤豆苗", "红糖发糕"], nightSnack: ["温羊奶", "桂圆炖蛋"] } },
-    // 第二周
-    { dayName: "第8天 · 周一", meals: { breakfast: ["牛奶燕麦粥", "南瓜馒头", "西红柿炒蛋", "清炒芥蓝"], lunch: ["红薯饭", "彩椒炒牛肉", "黄芪炖鸡汤", "蒜蓉西蓝花"], snack: ["红枣银耳羹", "苹果"], dinner: ["紫米饭", "姜丝炒腰花", "木耳山药", "鲫鱼通草汤"], nightSnack: ["热牛奶", "全麦饼干"] } },
-    { dayName: "第9天 · 周二", meals: { breakfast: ["黑米红枣粥", "鸡蛋饼", "麻油菠菜"], lunch: ["糙米饭", "清蒸鲈鱼", "莲藕排骨汤", "蒜蓉空心菜"], snack: ["木瓜牛奶", "核桃"], dinner: ["红豆饭", "山药炖鸡", "清炒莴笋", "猪蹄花生汤"], nightSnack: ["酒酿蛋花"] } },
-    { dayName: "第10天 · 周三", meals: { breakfast: ["小米南瓜粥", "紫薯包", "白煮蛋"], lunch: ["薏米饭", "番茄炖牛腩", "鲫鱼汤", "清炒菜心"], snack: ["银耳雪梨羹", "香蕉"], dinner: ["黑米饭", "麻油鸡腿", "蒜蓉娃娃菜", "当归红枣汤"], nightSnack: ["温豆浆"] } },
-    { dayName: "第11天 · 周四", meals: { breakfast: ["山药排骨粥", "全麦吐司", "蒸蛋"], lunch: ["红豆薏米饭", "香菇炖鸡", "清炒西葫芦", "猪肝汤"], snack: ["酸奶", "火龙果"], dinner: ["南瓜饭", "黄豆焖猪蹄", "蒜蓉西兰花", "乌鸡汤"], nightSnack: ["黑芝麻糊"] } },
-    { dayName: "第12天 · 周五", meals: { breakfast: ["花生红豆粥", "杂粮馒头", "炒鸡蛋"], lunch: ["紫米饭", "茶树菇炖鸭", "清炒油麦菜", "豆腐鱼汤"], snack: ["牛奶炖蛋", "橙子"], dinner: ["地瓜饭", "莲子炖排骨", "清炒丝瓜", "鸡血藤鸡汤"], nightSnack: ["红枣桂圆茶"] } },
-    { dayName: "第13天 · 周六", meals: { breakfast: ["五谷豆浆", "菜包", "水煮蛋"], lunch: ["荞麦饭", "洋葱炒牛肉", "上汤菠菜", "花生猪蹄汤"], snack: ["百合莲子羹", "猕猴桃"], dinner: ["小米山药粥", "虫草花蒸鸡", "清炒苋菜", "黄花菜瘦肉汤"], nightSnack: ["温牛奶"] } },
-    { dayName: "第14天 · 周日", meals: { breakfast: ["枸杞小米粥", "蛋饼", "清炒藕片"], lunch: ["红豆饭", "蒜香排骨", "炒三丝", "鲈鱼豆腐汤"], snack: ["椰奶西米露", "车厘子"], dinner: ["紫米粥", "当归炖羊肉", "蒜蓉空心菜", "鱼头汤"], nightSnack: ["酒酿圆子"] } },
-    // 第三周
-    { dayName: "第15天 · 周一", meals: { breakfast: ["红薯粥", "花卷", "肉末蒸蛋", "清炒娃娃菜"], lunch: ["黑米饭", "红烧鸡块", "玉米排骨汤", "蒜蓉生菜"], snack: ["红豆沙", "雪梨"], dinner: ["小米饭", "姜母鸭", "清炒山药", "西红柿蛋汤"], nightSnack: ["热牛奶", "小蛋糕"] } },
-    { dayName: "第16天 · 周二", meals: { breakfast: ["皮蛋瘦肉粥", "葱油饼", "煮鸡蛋", "清炒豆苗"], lunch: ["紫米粥", "啤酒鸭", "冬瓜丸子汤", "清炒空心菜"], snack: ["冰糖雪梨", "葡萄"], dinner: ["糙米饭", "腐竹烧肉", "蒜蓉秋葵", "紫菜蛋花汤"], nightSnack: ["红豆汤圆"] } },
-    { dayName: "第17天 · 周三", meals: { breakfast: ["南瓜粥", "玉米馒头", "虾仁蒸蛋", "清炒西葫芦"], lunch: ["燕麦饭", "土豆炖牛肉", "菌菇汤", "清炒小白菜"], snack: ["木瓜牛奶", "奇异果"], dinner: ["红豆饭", "可乐鸡翅", "清炒芦笋", "豆腐瘦肉汤"], nightSnack: ["银耳莲子羹"] } },
-    { dayName: "第18天 · 周四", meals: { breakfast: ["绿豆小米粥", "肉包子", "炒鸡蛋", "清炒油麦菜"], lunch: ["薏米饭", "糖醋排骨", "海带排骨汤", "清炒茼蒿"], snack: ["苹果泥", "坚果"], dinner: ["黑米饭", "蒜香鸡翅", "清炒土豆丝", "鱼头豆腐汤"], nightSnack: ["热豆奶"] } },
-    { dayName: "第19天 · 周五", meals: { breakfast: ["八宝粥", "煎饼", "卤蛋", "清炒空心菜"], lunch: ["五谷饭", "红烧狮子头", "番茄蛋花汤", "清炒油菜"], snack: ["芒果西米露", "香蕉"], dinner: ["紫薯饭", "清蒸带鱼", "西芹炒百合", "排骨萝卜汤"], nightSnack: ["牛奶炖蛋"] } },
-    { dayName: "第20天 · 周六", meals: { breakfast: ["玉米粥", "豆沙包", "葱花蛋", "清炒菠菜"], lunch: ["杂粮饭", "宫保鸡丁", "丝瓜蛋汤", "清炒西兰花"], snack: ["木瓜奶昔", "草莓"], dinner: ["南瓜饭", "梅菜扣肉", "清炒莴笋", "鸡汤"], nightSnack: ["芝麻糊"] } },
-    { dayName: "第21天 · 周日", meals: { breakfast: ["紫薯粥", "葱油花卷", "蒸水蛋", "清炒生菜"], lunch: ["红米饭", "蒜苔炒肉", "冬瓜薏米汤", "清炒菜心"], snack: ["冰糖雪梨", "橙子"], dinner: ["糙米饭", "红烧猪蹄", "清炒荷兰豆", "山药排骨汤"], nightSnack: ["红枣茶"] } },
-    // 第四周
-    { dayName: "第22天 · 周一", meals: { breakfast: ["黑米粥", "全麦吐司", "鸡蛋羹", "清炒上海青"], lunch: ["燕麦饭", "蚝油牛肉", "紫菜蛋花汤", "蒜蓉娃娃菜"], snack: ["酒酿圆子", "苹果"], dinner: ["小米饭", "清蒸鲈鱼", "炒时蔬", "玉米排骨汤"], nightSnack: ["热牛奶"] } },
-    { dayName: "第23天 · 周二", meals: { breakfast: ["胡萝卜粥", "肉夹馍", "煮鸡蛋", "清炒豆芽"], lunch: ["荞麦饭", "酱香鸭腿", "白菜豆腐汤", "清炒丝瓜"], snack: ["木瓜炖奶", "火龙果"], dinner: ["黑米饭", "红烧肉", "蒜蓉茄子", "香菇鸡汤"], nightSnack: ["红豆沙"] } },
-    { dayName: "第24天 · 周三", meals: { breakfast: ["山药粥", "葱油饼", "蒸蛋", "清炒黄瓜"], lunch: ["薏米饭", "辣子鸡", "冬瓜蛤蜊汤", "清炒芥蓝"], snack: ["银耳莲子", "葡萄"], dinner: ["红豆饭", "粉蒸排骨", "清炒藕片", "鱼汤"], nightSnack: ["温豆浆"] } },
-    { dayName: "第25天 · 周四", meals: { breakfast: ["南瓜小米粥", "馒头片", "炒鸡蛋", "清炒空心菜"], lunch: ["紫米饭", "啤酒烧鸭", "西红柿蛋汤", "蒜蓉西蓝花"], snack: ["椰奶西米露", "奇异果"], dinner: ["糙米饭", "豆豉蒸鱼", "清炒四季豆", "排骨莲藕汤"], nightSnack: ["百合羹"] } },
-    { dayName: "第26天 · 周五", meals: { breakfast: ["红枣燕麦粥", "包子", "白煮蛋", "清炒油麦菜"], lunch: ["黑米饭", "回锅肉", "玉米浓汤", "清炒娃娃菜"], snack: ["核桃露", "香蕉"], dinner: ["南瓜饭", "蒜香排骨", "清炒青笋", "鸡汤"], nightSnack: ["酒酿蛋花"] } },
-    { dayName: "第27天 · 周六", meals: { breakfast: ["杂粮粥", "鸡蛋饼", "炒时蔬"], lunch: ["红米饭", "香菇滑鸡", "酸菜鱼汤", "蒜蓉空心菜"], snack: ["水果拼盘", "酸奶"], dinner: ["小米粥", "红烧牛腩", "清炒豆苗", "海带排骨汤"], nightSnack: ["黑芝麻糊"] } },
-    { dayName: "第28天 · 周日", meals: { breakfast: ["白粥", "肉包", "水煮蛋", "清炒苋菜"], lunch: ["五谷饭", "盐焗鸡", "豆腐鱼头汤", "清炒菠菜"], snack: ["红枣银耳", "橙子"], dinner: ["紫薯饭", "清炖羊肉", "蒜蓉西蓝花", "菌菇汤"], nightSnack: ["温牛奶"] } }
+    { dayName: "第1天 · 周一", breakfast: ["红枣小米粥", "全麦馒头", "麻油猪肝", "煮鸡蛋", "清炒时蔬"], lunch: ["五谷饭", "麻油鸡", "鲫鱼豆腐汤", "清炒西兰花", "红豆汤"], snack: ["木瓜炖奶", "橙子", "黑芝麻糊"], dinner: ["紫米粥", "香菇乌鸡汤", "清蒸鲈鱼", "上汤娃娃菜", "药膳排骨"], nightSnack: ["热牛奶", "酒酿圆子"] },
+    { dayName: "第2天 · 周二", breakfast: ["山药瘦肉粥", "红薯饼", "菠菜炒鸡蛋", "腰果", "清炒茼蒿"], lunch: ["糙米饭", "黄豆炖猪蹄", "虫草花鸡汤", "蒜蓉空心菜", "桂圆红枣汤"], snack: ["银耳莲子羹", "香蕉", "全麦苏打饼干"], dinner: ["红豆薏米饭", "当归生姜羊肉汤", "彩椒炒牛肉", "清炒芥蓝", "枸杞蒸蛋"], nightSnack: ["温豆浆", "百合炖雪梨"] },
+    { dayName: "第3天 · 周三", breakfast: ["南瓜小米粥", "紫薯包", "木耳炒蛋", "蒸玉米段", "麻油菠菜"], lunch: ["燕麦米饭", "鲈鱼豆腐汤", "茶树菇炖鸡", "西芹百合", "花生炖猪尾"], snack: ["牛奶炖蛋", "红心火龙果", "核桃仁"], dinner: ["黑米粥", "黄芪炖乳鸽", "芦笋炒虾仁", "上汤苋菜", "桂圆糯米粥"], nightSnack: ["黑芝麻糊", "红枣桂圆饮"] },
+    { dayName: "第4天 · 周四", breakfast: ["花生红枣粥", "全麦吐司", "丝瓜炒蛋", "蒸南瓜", "清炒油菜"], lunch: ["红豆饭", "番茄炖牛腩", "冬瓜排骨汤", "蚝油生菜", "红豆芋头汤"], snack: ["酒酿小圆子", "蓝莓", "燕麦饼"], dinner: ["山药枸杞粥", "黄花菜猪心汤", "彩椒鸡丁", "清炒荷兰豆", "红糖糍粑"], nightSnack: ["温牛奶", "莲子百合羹"] },
+    { dayName: "第5天 · 周五", breakfast: ["核桃黑米粥", "玉米窝头", "苋菜鸡蛋饼", "水煮蛋", "清炒豇豆"], lunch: ["荞麦饭", "葱姜焖鸭", "黄花鱼汤", "地瓜叶", "莲子猪肚汤"], snack: ["椰奶西米露", "猕猴桃", "杏仁"], dinner: ["小米红薯粥", "四物鸡汤", "腐竹烧香菇", "清炒菜心", "芝麻汤圆"], nightSnack: ["酒酿蛋花", "桂圆紫米粥"] },
+    { dayName: "第6天 · 周六", breakfast: ["桂圆红枣粥", "红豆包", "蒸蛋羹", "清炒佛手瓜", "肉末蒸豆腐"], lunch: ["芝麻饭", "咖喱土豆鸡", "黄豆猪骨汤", "蒜蓉西蓝花", "银耳红枣汤"], snack: ["木瓜撞奶", "无花果", "芝士饼干"], dinner: ["南瓜饭", "天麻炖鱼头", "糖醋藕片", "荷塘小炒", "酒酿南瓜圆子"], nightSnack: ["热豆奶", "小米桂圆粥"] },
+    { dayName: "第7天 · 周日", breakfast: ["紫薯燕麦粥", "芝麻卷", "三色蒸蛋", "清炒莴笋", "腰果西芹"], lunch: ["十谷米饭", "香煎三文鱼", "竹荪鸡汤", "白灼秋葵", "红豆沙"], snack: ["杏仁豆腐", "樱桃", "燕麦能量球"], dinner: ["百合莲子粥", "杜仲炖腰花", "清蒸海鲈鱼", "上汤豆苗", "红糖发糕"], nightSnack: ["温羊奶", "桂圆炖蛋"] },
+    { dayName: "第8天 · 周一", breakfast: ["牛奶燕麦粥", "南瓜馒头", "西红柿炒蛋", "清炒芥蓝"], lunch: ["红薯饭", "彩椒炒牛肉", "黄芪炖鸡汤", "蒜蓉西蓝花"], snack: ["红枣银耳羹", "苹果"], dinner: ["紫米饭", "姜丝炒腰花", "木耳山药", "鲫鱼通草汤"], nightSnack: ["热牛奶", "全麦饼干"] },
+    { dayName: "第9天 · 周二", breakfast: ["黑米红枣粥", "鸡蛋饼", "麻油菠菜"], lunch: ["糙米饭", "清蒸鲈鱼", "莲藕排骨汤", "蒜蓉空心菜"], snack: ["木瓜牛奶", "核桃"], dinner: ["红豆饭", "山药炖鸡", "清炒莴笋", "猪蹄花生汤"], nightSnack: ["酒酿蛋花"] },
+    { dayName: "第10天 · 周三", breakfast: ["小米南瓜粥", "紫薯包", "白煮蛋"], lunch: ["薏米饭", "番茄炖牛腩", "鲫鱼汤", "清炒菜心"], snack: ["银耳雪梨羹", "香蕉"], dinner: ["黑米饭", "麻油鸡腿", "蒜蓉娃娃菜", "当归红枣汤"], nightSnack: ["温豆浆"] },
+    { dayName: "第11天 · 周四", breakfast: ["山药排骨粥", "全麦吐司", "蒸蛋"], lunch: ["红豆薏米饭", "香菇炖鸡", "清炒西葫芦", "猪肝汤"], snack: ["酸奶", "火龙果"], dinner: ["南瓜饭", "黄豆焖猪蹄", "蒜蓉西兰花", "乌鸡汤"], nightSnack: ["黑芝麻糊"] },
+    { dayName: "第12天 · 周五", breakfast: ["花生红豆粥", "杂粮馒头", "炒鸡蛋"], lunch: ["紫米饭", "茶树菇炖鸭", "清炒油麦菜", "豆腐鱼汤"], snack: ["牛奶炖蛋", "橙子"], dinner: ["地瓜饭", "莲子炖排骨", "清炒丝瓜", "鸡血藤鸡汤"], nightSnack: ["红枣桂圆茶"] },
+    { dayName: "第13天 · 周六", breakfast: ["五谷豆浆", "菜包", "水煮蛋"], lunch: ["荞麦饭", "洋葱炒牛肉", "上汤菠菜", "花生猪蹄汤"], snack: ["百合莲子羹", "猕猴桃"], dinner: ["小米山药粥", "虫草花蒸鸡", "清炒苋菜", "黄花菜瘦肉汤"], nightSnack: ["温牛奶"] },
+    { dayName: "第14天 · 周日", breakfast: ["枸杞小米粥", "蛋饼", "清炒藕片"], lunch: ["红豆饭", "蒜香排骨", "炒三丝", "鲈鱼豆腐汤"], snack: ["椰奶西米露", "车厘子"], dinner: ["紫米粥", "当归炖羊肉", "蒜蓉空心菜", "鱼头汤"], nightSnack: ["酒酿圆子"] }
   ];
 
-  let currentDayIndex = 0;
-  const dayLabelSpan = document.getElementById('dayLabel');
-  const mealContainer = document.getElementById('dynamicMealGrid');
+  let currentIndex = 0;
+  const dayLabel = document.getElementById('dayLabel');
+  const mealGrid = document.getElementById('dynamicMealGrid');
 
-  function renderCurrentDay() {
-    const menu = weeklyMenu[currentDayIndex];
-    if (!menu) return;
-    dayLabelSpan.innerText = menu.dayName;
-    const m = menu.meals;
-    const html = `
-      <div class="meal-grid">
-        <div class="meal-time"><strong>🌅 早餐</strong><div class="meal-items">${m.breakfast.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>☀️ 午餐</strong><div class="meal-items">${m.lunch.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🍎 加餐</strong><div class="meal-items">${m.snack.map(i=>`<span>${i}</span>`).join('')}</div></div>
-        <div class="meal-time"><strong>🌙 晚餐</strong><div class="meal-items">${m.dinner.map(i=>`<
+  function renderMenu(index) {
+    const day = weeklyMenu[index];
+    if (!day) return;
+    dayLabel.innerText = day.dayName;
+    mealGrid.innerHTML = `
+      <div class="meal-time"><strong>🌅 早餐</strong><div class="meal-items">${day.breakfast.map(i => `<span>${i}</span>`).join('')}</div></div>
+      <div class="meal-time"><strong>☀️ 午餐</strong><div class="meal-items">${day.lunch.map(i => `<span>${i}</span>`).join('')}</div></div>
+      <div class="meal-time"><strong>🍎 加餐</strong><div class="meal-items">${day.snack.map(i => `<span>${i}</span>`).join('')}</div></div>
+      <div class="meal-time"><strong>🌙 晚餐</strong><div class="meal-items">${day.dinner.map(i => `<span>${i}</span>`).join('')}</div></div>
+      <div class="meal-time"><strong>🌜 夜宵</strong><div class="meal-items">${day.nightSnack.map(i => `<span>${i}</span>`).join('')}</div></div>
+    `;
+  }
+
+  document.getElementById('prevDayBtn').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + weeklyMenu.length) % weeklyMenu.length;
+    renderMenu(currentIndex);
+  });
+  document.getElementById('nextDayBtn').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % weeklyMenu.length;
+    renderMenu(currentIndex);
+  });
+
+  renderMenu(0);
+</script>
+</body>
+</html>
